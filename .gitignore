@@ -1,0 +1,6 @@
+bin/
+.vs/
+EspaceGame.sln
+EspaceGame.vcxproj
+EspaceGame.vcxproj.filters
+EspaceGame.vcxproj.user
