@@ -1,8 +1,21 @@
 {
   "mine": {
-    "machines": {
-      "x": [ 1, 6, 15 ],
-      "y": [ 2, 8, 8 ]
-    }
+    "machines": [
+      {
+        "machine": "iron_drill",
+        "x": 2,
+        "y": 2
+      },
+      {
+        "machine": "iron_drill",
+        "x": 5,
+        "y": 4
+      },
+      {
+        "machine": "copper_drill",
+        "x": 16,
+        "y": 11
+      }
+    ]
   }
 }

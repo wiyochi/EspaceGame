@@ -31,9 +31,9 @@ int main()
 	rapidjson::Document d;
 	d.Parse(json);
 
-	rapidjson::Value& s = d["mine"]["machines"]["x"];
+	rapidjson::Value& s = d["mine"]["machines"];
 	for (rapidjson::SizeType i = 0; i < s.Size(); i++)
-		printf("a[%d] = %d\n", i, s[i].GetInt());
+		std::cout << s[i]["machine"].GetType() << std::endl;
 
 	rapidjson::StringBuffer buffer;
 	rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
