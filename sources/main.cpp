@@ -4,6 +4,7 @@
 #include <rapidjson/document.h>
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
+#include "entities/loaders/Loader.h"
 
 int main()
 {
@@ -11,6 +12,7 @@ int main()
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
 
+	/*
 	std::ifstream file("resources/saves/saveTest.json", std::ios::in);
 	std::string str;
 
@@ -40,6 +42,11 @@ int main()
 	d.Accept(writer);
 
 	std::cout << buffer.GetString() << std::endl;
+	*/
+
+	Loader l;
+	Machine* m = l.loadMachine("resources/machines/copper_drill.json");
+	std::cout << "Machine: " << *m << std::endl;
 
 	while (window.isOpen())
 	{
