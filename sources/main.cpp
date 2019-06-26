@@ -8,41 +8,10 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!");
 
-	/*
-	std::ifstream file("resources/saves/saveTest.json", std::ios::in);
-	std::string str;
-
-	if (file)
-	{
-		char c;
-		while (file.get(c))
-			str.push_back(c);
-
-		file.close();
-	}
-	else
-	{
-		std::cout << "Erreur load file" << std::endl;
-	}
-
-	const char* json = str.c_str();
-	rapidjson::Document d;
-	d.Parse(json);
-
-	rapidjson::Value& s = d["mine"]["machines"];
-	for (rapidjson::SizeType i = 0; i < s.Size(); i++)
-		std::cout << s[i]["machine"].GetType() << std::endl;
-
-	rapidjson::StringBuffer buffer;
-	rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
-	d.Accept(writer);
-
-	std::cout << buffer.GetString() << std::endl;
-	*/
+	sf::View v;
+	float viewSpeed = 0.1f;
 
 	Loader l;
 	Machine* m = l.loadMachine("resources/machines/copper_drill.json");
@@ -53,12 +22,41 @@ int main()
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
+			switch (event.type)
+			{
+			case sf::Event::Closed:
 				window.close();
+				break;
+			case sf::Event::MouseWheelScrolled:
+				if (event.mouseWheelScroll.delta < 0)
+				{
+					v.zoom(1.1f);
+					viewSpeed *= 1.1f;
+				}
+				else
+				{
+					v.zoom(0.9f);
+					viewSpeed *= 0.9f;
+				}
+				break;
+			default:
+				break;
+			}
 		}
 
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			v.move(0, -viewSpeed);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			v.move(0, viewSpeed);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			v.move(-viewSpeed, 0);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			v.move(viewSpeed, 0);
+
+		window.setView(v);
+
 		window.clear();
-		window.draw(shape);
+		window.draw(*m);
 		window.display();
 	}
 

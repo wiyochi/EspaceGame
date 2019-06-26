@@ -1,11 +1,11 @@
 #include "Machine.h"
 
-
 Machine::Machine(std::string filename_texture, Item in, Item out, float energy) :
 	m_position(sf::Vector2f(0, 0)),
 	m_itemIn(in),
 	m_itemOut(out),
-	m_energy(energy)
+	m_energy(energy),
+	m_shape(sf::LinesStrip)
 {
 	if (!m_texture.loadFromFile(filename_texture))
 		std::cout << "Fail to load machine texture" << std::endl;
@@ -15,40 +15,21 @@ Machine::~Machine()
 {
 }
 
+sf::VertexArray& Machine::getShape()
+{
+	return m_shape;
+}
+
 std::ostream& operator<<(std::ostream& out, Machine& m)
 {
-	out << "IN:" << itemToString(m.m_itemIn) << "|OUT:" << itemToString(m.m_itemOut) << "|ENERGY:" << m.m_energy;
+	out << "in:" << itemToString(m.m_itemIn) << "|out:" << itemToString(m.m_itemOut) << "|energy:" << m.m_energy << "|shape:[";
+	for (size_t i = 0; i < m.m_shape.getVertexCount(); i++)
+		out << "[" << m.m_shape[i].position.x << "," << m.m_shape[i].position.y << "]";
+	out << "]";
 	return out;
 }
 
-Item stringToItem(std::string str_item)
+void Machine::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	Item item = null;
-
-	if (str_item == "iron_ore")
-		item = iron_ore;
-	else if (str_item == "copper_ore")
-		item = copper_ore;
-
-	return item;
-}
-
-std::string itemToString(Item item)
-{
-	std::string str = "";
-
-	switch (item)
-	{
-	case Item::null:
-		str = "null";
-		break;
-	case Item::iron_ore:
-		str = "iron_ore";
-		break;
-	case Item::copper_ore:
-		str = "copper_ore";
-		break;
-	}
-
-	return str;
+	target.draw(m_shape);
 }

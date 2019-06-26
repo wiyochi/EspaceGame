@@ -34,8 +34,16 @@ Machine* Loader::loadMachine(std::string JSonFile)
 	Item out = stringToItem(d["out"].GetString());
 	int energy = d["energy"].GetInt();
 	std::string texture = d["texture"].GetString();
+	rapidjson::Value& vertexArray = d["shape"];
 
 	Machine* machine = new Machine(texture, in, out, energy);
+
+	sf::VertexArray& machineShape = machine->getShape();
+	for (rapidjson::SizeType i = 0; i < vertexArray.Size(); i++)
+	{
+		rapidjson::Value& vertex = vertexArray[i];
+		machineShape.append(sf::Vertex(sf::Vector2f(vertex[0].GetInt(), vertex[1].GetInt())));
+	}
 
 	return machine;
 }
