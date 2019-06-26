@@ -1,6 +1,6 @@
 #include "Button.hpp"
 
-Button::Button(std::string fontName, std::string text)
+Button::Button(std::string fontName, std::string text, sf::Vector2f size) : _shape(size)
 {
     if (!_font.loadFromFile(fontName))
     {
@@ -11,9 +11,12 @@ Button::Button(std::string fontName, std::string text)
         _text.setString(text);
         _text.setFillColor(sf::Color::Red);
     }
+    
+    _shape.setFillColor(sf::Color::Blue);
 }
 
 void Button::draw(sf::RenderWindow & window) const
 {
+    window.draw(_shape);
     window.draw(_text);
 }

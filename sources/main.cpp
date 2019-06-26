@@ -4,7 +4,7 @@
 
 int main()
 {
-    Button b("/resources/fonts/Roboto-Thin.ttf", "OUAIS OUAIS OUAIS");
+    Button b("resources/fonts/Roboto-Thin.ttf", "OUAIS OUAIS OUAIS", sf::Vector2f(100, 100));
 	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);

@@ -9,9 +9,9 @@ class Button {
 private:
     sf::Font _font;
     sf::Text _text;
-    /*sf::Shape _shape;*/
+    sf::RectangleShape _shape;
 public:
-    Button(std::string fontName, std::string text);
+    Button(std::string fontName, std::string text, sf::Vector2f size);
     void draw(sf::RenderWindow & window) const;
     
 };
