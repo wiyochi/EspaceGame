@@ -11,8 +11,10 @@ private:
     sf::Text _text;
     sf::RectangleShape _shape;
 public:
-    Button(std::string fontName, std::string text, sf::Vector2f size);
+    Button(std::string fontName, sf::String text, sf::Vector2f size);
     void draw(sf::RenderWindow & window) const;
+    void move(float offsetX, float offsetY);
+    void addText(std::string text);
     
 };
 

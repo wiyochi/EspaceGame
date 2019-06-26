@@ -1,6 +1,6 @@
 #include "Button.hpp"
 
-Button::Button(std::string fontName, std::string text, sf::Vector2f size) : _shape(size)
+Button::Button(std::string fontName, sf::String text, sf::Vector2f size) : _shape(size)
 {
     if (!_font.loadFromFile(fontName))
     {
@@ -19,4 +19,15 @@ void Button::draw(sf::RenderWindow & window) const
 {
     window.draw(_shape);
     window.draw(_text);
+}
+
+void Button::move(float offsetX, float offsetY)
+{
+    _text.move(offsetX, offsetY);
+    _shape.move(offsetX, offsetY);
+}
+
+void Button::addText(std::string text)
+{
+    _text.setString(_text.getString() + text);
 }
