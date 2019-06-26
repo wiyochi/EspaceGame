@@ -15,5 +15,5 @@ Button::Button(std::string fontName, std::string text)
 
 void Button::draw(sf::RenderWindow & window) const
 {
-    
+    window.draw(_text);
 }

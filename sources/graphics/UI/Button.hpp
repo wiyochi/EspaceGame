@@ -9,7 +9,7 @@ class Button {
 private:
     sf::Font _font;
     sf::Text _text;
-    /*sf::Shape m_shape;*/
+    /*sf::Shape _shape;*/
 public:
     Button(std::string fontName, std::string text);
     void draw(sf::RenderWindow & window) const;
