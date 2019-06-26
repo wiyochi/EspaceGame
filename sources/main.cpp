@@ -1,7 +1,10 @@
 #include <SFML/Graphics.hpp>
+#include "graphics/UI/Button.hpp"
+#include <string>
 
 int main()
 {
+    Button b("/resources/fonts/Roboto-Thin.ttf", "OUAIS OUAIS OUAIS");
 	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
@@ -16,7 +19,12 @@ int main()
 		}
 
 		window.clear();
+        
+        
+        
 		window.draw(shape);
+        b.draw(window);
+        
 		window.display();
 	}
 
