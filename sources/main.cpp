@@ -1,10 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <SFML/Graphics.hpp>
-#include <rapidjson/document.h>
-#include "rapidjson/writer.h"
-#include "rapidjson/stringbuffer.h"
 #include "entities/loaders/Loader.h"
+#include "map/Grid.h"
 
 int main()
 {
@@ -13,9 +11,10 @@ int main()
 	sf::View v;
 	float viewSpeed = 0.1f;
 
-	Loader l;
-	Machine* m = l.loadMachine("resources/machines/copper_drill.json");
+	Machine* m = Loader::loadMachine("resources/machines/copper_drill.json");
 	std::cout << "Machine: " << *m << std::endl;
+
+	Grid* mineGrid = new Grid(10, 10, sf::Vector2f(50.f, 50.f));
 
 	while (window.isOpen())
 	{
@@ -57,6 +56,7 @@ int main()
 
 		window.clear();
 		window.draw(*m);
+		window.draw(*mineGrid);
 		window.display();
 	}
 

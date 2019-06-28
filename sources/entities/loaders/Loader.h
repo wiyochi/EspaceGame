@@ -6,11 +6,8 @@
 #include <rapidjson/document.h>
 #include "sources/entities/Machine.h"
 
-class Loader
+namespace Loader
 {
-public:
-	Loader();
-	~Loader();
 	Machine* loadMachine(std::string JSonFile);
 };
 
