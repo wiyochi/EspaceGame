@@ -22,6 +22,16 @@ int main()
             if (event.type == sf::Event::MouseButtonPressed)
             {
                 std::cout << "{" << event.mouseButton.x << ";" << event.mouseButton.y << "}" << std::endl;
+                
+                for (auto const& but: Button::_buttons)
+                {
+                    float x = window.mapPixelToCoords(sf::Mouse::getPosition(window)).x;
+                    float y = window.mapPixelToCoords(sf::Mouse::getPosition(window)).y;
+                    if (but->contains(x, y))
+                    {
+                        
+                    }
+                }
             }
 		}
 
