@@ -12,9 +12,11 @@ int main()
 	float viewSpeed = 0.1f;
 
 	Machine* m = Loader::loadMachine("resources/machines/copper_drill.json");
+	m->setPosition(sf::Vector2i(4, 4));
 	std::cout << "Machine: " << *m << std::endl;
 
 	Grid* mineGrid = new Grid(10, 10, sf::Vector2f(50.f, 50.f));
+	mineGrid->addMachine(m);
 
 	while (window.isOpen())
 	{

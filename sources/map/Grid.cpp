@@ -30,12 +30,16 @@ void Grid::addMachine(Machine* machine)
 
 	for (unsigned int i = 0; i < machineShape.size(); i++)
 	{
-		
+		m_cases.push_back(sf::RectangleShape(m_squareSize));
+		m_cases[m_cases.size() - 1].setPosition(sf::Vector2f((pos.x + machineShape[i].x) * m_squareSize.x, (pos.y + machineShape[i].y) * m_squareSize.y));
+		m_cases[m_cases.size() - 1].setFillColor(sf::Color::Red);
 	}
 }
 
 
 void Grid::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	for (auto square : m_cases)
+		target.draw(square, states);
 	target.draw(&m_pointStrips[0], m_pointStrips.size(), sf::Lines);
 }

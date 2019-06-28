@@ -4,8 +4,7 @@ Machine::Machine(std::string filename_texture, Item in, Item out, float energy) 
 	m_position(sf::Vector2i(0, 0)),
 	m_itemIn(in),
 	m_itemOut(out),
-	m_energy(energy),
-	m_shape(sf::LinesStrip)
+	m_energy(energy)
 {
 	if (!m_texture.loadFromFile(filename_texture))
 		std::cout << "Fail to load machine texture" << std::endl;
