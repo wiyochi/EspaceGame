@@ -2,7 +2,7 @@
 
 namespace Loader
 {
-	Machine* loadMachine(std::string JSonFile)
+	rapidjson::Document getDocument(std::string JSonFile)
 	{
 		std::ifstream file(JSonFile, std::ios::in);
 		std::string str;
@@ -24,6 +24,13 @@ namespace Loader
 		rapidjson::Document d;
 		d.Parse(json);
 
+		return d;
+	}
+
+	Machine* loadMachine(std::string JSonFile)
+	{
+		rapidjson::Document d = getDocument(JSonFile);
+
 		Item				in			= stringToItem(d["in"].GetString());
 		Item				out			= stringToItem(d["out"].GetString());
 		int					energy		= d["energy"].GetInt();
@@ -40,5 +47,23 @@ namespace Loader
 		}
 
 		return machine;
+	}
+
+	void loadSave(std::string JSonFile, Grid* poles[4])
+	{
+		rapidjson::Document d = getDocument(JSonFile);
+
+		// Pole mine
+		poles[0] = new Grid(20, 20, sf::Vector2f(50.f, 50.f));
+		rapidjson::Value& machineArray = d["mine"]["machines"];
+		for (rapidjson::SizeType i = 0; i < machineArray.Size(); i++)
+		{
+			std::string str = "resources/machines/";
+			str.append(machineArray[i]["machine"].GetString());
+			str.append(".json");
+			Machine* m = loadMachine(str);
+			m->setPosition(sf::Vector2i(machineArray[i]["x"].GetInt(), machineArray[i]["y"].GetInt()));
+			poles[0]->addMachine(m);
+		}
 	}
 }

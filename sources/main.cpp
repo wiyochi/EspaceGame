@@ -2,7 +2,7 @@
 #include <fstream>
 #include <SFML/Graphics.hpp>
 #include "entities/loaders/Loader.h"
-#include "map/Grid.h"
+#include "entities/map/Grid.h"
 
 int main()
 {
@@ -11,12 +11,15 @@ int main()
 	sf::View v;
 	float viewSpeed = 0.1f;
 
-	Machine* m = Loader::loadMachine("resources/machines/copper_drill.json");
-	m->setPosition(sf::Vector2i(4, 4));
-	std::cout << "Machine: " << *m << std::endl;
+	//Machine* m = Loader::loadMachine("resources/machines/copper_drill.json");
+	//m->setPosition(sf::Vector2i(4, 4));
+	//std::cout << "Machine: " << *m << std::endl;
 
-	Grid* mineGrid = new Grid(10, 10, sf::Vector2f(50.f, 50.f));
-	mineGrid->addMachine(m);
+	//Grid* mineGrid = new Grid(10, 10, sf::Vector2f(50.f, 50.f));
+	//mineGrid->addMachine(m);
+
+	Grid* poles[4];
+	Loader::loadSave("resources/saves/saveTest.json", poles);
 
 	while (window.isOpen())
 	{
@@ -57,8 +60,9 @@ int main()
 		window.setView(v);
 
 		window.clear();
-		window.draw(*m);
-		window.draw(*mineGrid);
+		//window.draw(*m);
+		//window.draw(*mineGrid);
+		window.draw(*(poles[0]));
 		window.display();
 	}
 
