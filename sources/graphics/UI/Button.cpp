@@ -10,6 +10,7 @@ Button::Button(std::string fontName, sf::String text, sf::Vector2f size) : _shap
         _text.setFont(_font);
         _text.setString(text);
         _text.setFillColor(sf::Color::Red);
+        _buttons.push_back(*this);
     }
     
     _shape.setFillColor(sf::Color::Blue);

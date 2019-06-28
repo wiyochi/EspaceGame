@@ -1,8 +1,5 @@
 #include "PoleButton.hpp"
 
-
-
-
 PoleButton::PoleButton(int id) : _button("resources/fonts/Roboto-Thin.ttf", L"Pôle ", sf::Vector2f(640, 360))
 {
     _button.move(x[id], y[id]);
