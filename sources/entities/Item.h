@@ -1,16 +1,22 @@
 #pragma once
 #include <string>
+#include <vector>
+#include <iostream>
+#include <SFML/Graphics.hpp>
 
-/*   Enum Item
- * Contient actuellement tous les items créés et utilisés par les machines
- * Est temporaire puisque l'objectif est de load tous les items depuis un json
-*/
-enum Item
+class Item
 {
-	null,
-	iron_ore,
-	copper_ore
-};
+public:
+	static std::vector<Item*> items;
+	static Item* findItem(std::string name);
 
-Item stringToItem(std::string str_item);
-std::string itemToString(Item item);
+	Item(std::string className, std::string name, std::string textureFileName);
+	~Item();
+	std::string getName() const;
+	std::string getClass() const;
+
+private:
+	std::string m_name;
+	std::string m_class;
+	sf::Texture m_texture;
+};

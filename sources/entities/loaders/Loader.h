@@ -13,5 +13,6 @@ namespace Loader
 
 	Machine* loadMachine(std::string JSonFile);
 	void loadSave(std::string JSonFile, Grid* poles[4]);
+	void loadItems(std::string JSonFile);
 };
 

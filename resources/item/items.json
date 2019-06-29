@@ -1,0 +1,29 @@
+{
+    "items": [
+        {
+            "class": "null",
+            "name": "",
+            "texture": ""
+        },
+        {
+            "class": "ore",
+            "name": "iron_ore",
+            "texture": ""
+        },
+        {
+            "class": "ore",
+            "name": "copper_ore",
+            "texture": ""
+        },
+        {
+            "class": "plate",
+            "name": "iron_plate",
+            "texture": ""
+        },
+        {
+            "class": "plate",
+            "name": "copper_plate",
+            "texture": ""
+        }
+    ]
+}

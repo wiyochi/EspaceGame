@@ -9,6 +9,7 @@ public:
 	Grid(int width, int height, sf::Vector2f squareSize);
 	~Grid();
 	void addMachine(Machine* machine);
+	std::vector<Machine*>& getMachines();
 
 private:
 	int m_width;

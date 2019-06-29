@@ -11,15 +11,17 @@ int main()
 	sf::View v;
 	float viewSpeed = 0.1f;
 
-	//Machine* m = Loader::loadMachine("resources/machines/copper_drill.json");
-	//m->setPosition(sf::Vector2i(4, 4));
-	//std::cout << "Machine: " << *m << std::endl;
-
-	//Grid* mineGrid = new Grid(10, 10, sf::Vector2f(50.f, 50.f));
-	//mineGrid->addMachine(m);
-
 	Grid* poles[4];
+
+	Loader::loadItems("resources/item/items.json");
 	Loader::loadSave("resources/saves/saveTest.json", poles);
+
+	//Affichage debug des machines du pole mine
+	std::vector<Machine*> machines = poles[0]->getMachines();
+	for(unsigned int i = 0; i < machines.size(); i++)
+	{
+		std::cout << "Machine " << i << ": " << *(machines[i]) << std::endl;
+	}
 
 	while (window.isOpen())
 	{
@@ -60,8 +62,6 @@ int main()
 		window.setView(v);
 
 		window.clear();
-		//window.draw(*m);
-		//window.draw(*mineGrid);
 		window.draw(*(poles[0]));
 		window.display();
 	}

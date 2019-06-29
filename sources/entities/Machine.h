@@ -8,7 +8,7 @@
 class Machine : public sf::Drawable
 {
 public:
-	Machine(std::string filename_texture, Item in, Item out, float energy);
+	Machine(std::string filename_texture, Item* in, Item* out, float energy);
 	~Machine();
 	std::vector<sf::Vector2i>& getShape();
 	void setPosition(sf::Vector2i newPos);
@@ -19,8 +19,8 @@ public:
 private:
 	sf::Texture					m_texture;
 	sf::Vector2i				m_position;
-	Item						m_itemIn;
-	Item						m_itemOut;
+	Item*						m_itemIn;
+	Item*						m_itemOut;
 	float						m_energy;
 	std::vector<sf::Vector2i>	m_shape;
 

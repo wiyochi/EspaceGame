@@ -21,7 +21,7 @@ Grid::~Grid()
 {
 }
 
-// TODO: faire les vérif nécessaires
+// TODO: faire les vï¿½rif nï¿½cessaires
 void Grid::addMachine(Machine* machine)
 {
 	m_machines.push_back(machine);
@@ -34,6 +34,11 @@ void Grid::addMachine(Machine* machine)
 		m_cases[m_cases.size() - 1].setPosition(sf::Vector2f((pos.x + machineShape[i].x) * m_squareSize.x, (pos.y + machineShape[i].y) * m_squareSize.y));
 		m_cases[m_cases.size() - 1].setFillColor(sf::Color::Red);
 	}
+}
+
+std::vector<Machine*>& Grid::getMachines()
+{
+	return m_machines;
 }
 
 
