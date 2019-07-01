@@ -29,7 +29,7 @@ int main()
                     float y = window.mapPixelToCoords(sf::Mouse::getPosition(window)).y;
                     if (but->contains(x, y))
                     {
-                        
+                        but->action();
                     }
                 }
             }

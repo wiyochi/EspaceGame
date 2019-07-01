@@ -9,14 +9,11 @@
 const int x[] = {0, 640, 0, 640};
 const int y[] = {0, 0, 360, 360};
 
-class PoleButton {
-private:
-    Button _button;
+class PoleButton : public Button {
 public:
     PoleButton(int id);
-    void draw(sf::RenderWindow & window) const;
-    void move(float, float);
-    
+    virtual void action();
+    virtual void draw(sf::RenderWindow & window) const;
 };
 
 #endif

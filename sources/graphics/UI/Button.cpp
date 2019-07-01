@@ -44,3 +44,8 @@ bool Button::contains(float x, float y)
 {
     return _shape.getGlobalBounds().contains(x, y);
 }
+
+void Button::action()
+{
+    std::cout << "Click : " << getText() << std::endl;
+}
