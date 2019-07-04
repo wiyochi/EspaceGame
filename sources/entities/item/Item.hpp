@@ -10,13 +10,15 @@ public:
 	static std::vector<Item*> items;
 	static Item* findItem(std::string name);
 
-	Item(std::string className, std::string name, std::string textureFileName);
+	Item(std::string name, std::string className, std::string textureFileName);
 	~Item();
-	std::string getName() const;
-	std::string getClass() const;
+	std::string getName();
+	std::string getClassName();
+
+	friend std::ostream& operator<<(std::ostream& out, Item& i);
 
 private:
 	std::string m_name;
-	std::string m_class;
+	std::string m_className;
 	sf::Texture m_texture;
 };

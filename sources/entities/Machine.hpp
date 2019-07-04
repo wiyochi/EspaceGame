@@ -3,16 +3,16 @@
 #include <iostream>
 #include <vector>
 #include <SFML/Graphics.hpp>
-#include "Item.h"
+#include "item/Item.hpp"
 
 class Machine : public sf::Drawable
 {
 public:
 	Machine(std::string filename_texture, Item* in, Item* out, float energy);
 	~Machine();
-	std::vector<sf::Vector2i>& getShape();
-	void setPosition(sf::Vector2i newPos);
-	sf::Vector2i getPosition();
+	std::vector<sf::Vector2i>& 	getShape	();
+	void 						setPosition	(sf::Vector2i newPos);
+	sf::Vector2i 				getPosition	();
 
 	friend std::ostream& operator<<(std::ostream& out, Machine& m);
 

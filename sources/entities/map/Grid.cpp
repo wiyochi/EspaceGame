@@ -1,4 +1,4 @@
-#include "Grid.h"
+#include "Grid.hpp"
 
 Grid::Grid(int width, int height, sf::Vector2f squareSize) :
 	m_width(width),

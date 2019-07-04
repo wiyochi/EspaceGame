@@ -16,6 +16,16 @@
             "texture": ""
         },
         {
+            "class": "liquid_ore",
+            "name": "copper_liquid",
+            "texture": ""
+        },
+        {
+            "class": "liquid_ore",
+            "name": "iron_liquid",
+            "texture": ""
+        },
+        {
             "class": "plate",
             "name": "iron_plate",
             "texture": ""

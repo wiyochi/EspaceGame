@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <SFML/Graphics.hpp>
-#include "entities/loaders/Loader.h"
-#include "entities/map/Grid.h"
+#include "entities/loaders/Loader.hpp"
+#include "entities/map/Grid.hpp"
 
 int main()
 {
@@ -16,12 +16,19 @@ int main()
 	Loader::loadItems("resources/item/items.json");
 	Loader::loadSave("resources/saves/saveTest.json", poles);
 
+    //Affichage debug des items load
+	for(unsigned int i = 0; i < Item::items.size(); i++)
+	{
+		std::cout << "Machine " << i << ": " << *(Item::items[i]) << std::endl;
+	}
+
 	//Affichage debug des machines du pole mine
 	std::vector<Machine*> machines = poles[0]->getMachines();
 	for(unsigned int i = 0; i < machines.size(); i++)
 	{
 		std::cout << "Machine " << i << ": " << *(machines[i]) << std::endl;
 	}
+    
 
 	while (window.isOpen())
 	{

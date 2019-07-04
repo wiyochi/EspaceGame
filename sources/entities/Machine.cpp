@@ -1,4 +1,4 @@
-#include "Machine.h"
+#include "Machine.hpp"
 
 Machine::Machine(std::string filename_texture, Item* in, Item* out, float energy) :
 	m_position(sf::Vector2i(0, 0)),
@@ -31,7 +31,11 @@ sf::Vector2i Machine::getPosition()
 
 std::ostream& operator<<(std::ostream& out, Machine& m)
 {
-	out << "in:" << m.m_itemIn->getName() << "|out:" << m.m_itemOut->getName() << "|energy:" << m.m_energy << "|shape:[";
+	out << "Machine(" << &m;
+	out << "): in[\"" << m.m_itemIn->getName();
+	out << "\"]out[\"" << m.m_itemOut->getName();
+	out << "\"]energy[" << m.m_energy;
+	out << "]shape[";
 	for (size_t i = 0; i < m.m_shape.size(); i++)
 		out << "[" << m.m_shape[i].x << "," << m.m_shape[i].y << "]";
 	out << "]";

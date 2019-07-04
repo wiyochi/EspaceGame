@@ -1,4 +1,4 @@
-#include "Loader.h"
+#include "Loader.hpp"
 
 namespace Loader
 {
@@ -73,6 +73,6 @@ namespace Loader
 
 		rapidjson::Value& itemsArray = d["items"];
 		for (rapidjson::SizeType i = 0; i < itemsArray.Size(); i++)
-			Item::items.push_back(new Item(itemsArray[i]["class"].GetString(), itemsArray[i]["name"].GetString(), itemsArray[i]["texture"].GetString()));
+			new Item(itemsArray[i]["name"].GetString(), itemsArray[i]["class"].GetString(), itemsArray[i]["texture"].GetString());
 	}
 }

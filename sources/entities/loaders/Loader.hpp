@@ -4,8 +4,8 @@
 #include <string>
 #include <fstream>
 #include <rapidjson/document.h>
-#include "../Machine.h"
-#include "../map/Grid.h"
+#include "../Machine.hpp"
+#include "../map/Grid.hpp"
 
 namespace Loader
 {
