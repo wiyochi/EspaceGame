@@ -2,18 +2,22 @@
 #include <vector>
 #include "Item.hpp"
 
+struct ItemQuantity
+{
+    Item*   item;
+    int     quantity;
+};
+
 class ItemSet
 {
 public:
-    ItemSet(std::vector<Item*> items);
-    ItemSet(std::vector<std::vector<Item*>>& set);
+    ItemSet(std::vector<std::vector<Item*>>& items, std::vector<std::vector<int>>& quantity);
     ~ItemSet();
-    void addItems(std::vector<Item*> items);
-    std::vector<std::vector<Item*>>& getSet();
-    std::vector<std::vector<Item*>> getCopySet();
+    std::vector<std::vector<ItemQuantity*>>& getSet();
+    std::vector<std::vector<ItemQuantity*>> getCopySet();
 
-    bool operator==(ItemSet& itemSet);
+	friend std::ostream& operator<<(std::ostream& out, ItemSet& s);
 
 private:
-    std::vector<std::vector<Item*>> m_set;
+    std::vector<std::vector<ItemQuantity*>> m_set;
 };

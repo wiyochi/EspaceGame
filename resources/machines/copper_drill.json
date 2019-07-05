@@ -1,6 +1,16 @@
 {
-  "in": "",
-  "out": "copper_ore",
+  "in": [
+    {
+      "item": "null",
+      "quantity": 0
+    }
+  ],
+  "out": [
+    {
+      "item": "copper_ore",
+      "quantity": 1
+    }
+  ],
   "energy": 25,
   "shape": [
     [ 0, 0 ],

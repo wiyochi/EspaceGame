@@ -15,6 +15,16 @@
         "machine": "copper_drill",
         "x": 16,
         "y": 11
+      },
+      {
+        "machine": "foundry",
+        "x": 5,
+        "y": 10
+      },
+      {
+        "machine": "steel_foundry",
+        "x": 10,
+        "y": 5
       }
     ]
   },

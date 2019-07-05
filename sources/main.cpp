@@ -19,7 +19,7 @@ int main()
     //Affichage debug des items load
 	for(unsigned int i = 0; i < Item::items.size(); i++)
 	{
-		std::cout << "Machine " << i << ": " << *(Item::items[i]) << std::endl;
+		std::cout << "Item " << i << ": " << *(Item::items[i]) << std::endl;
 	}
 
 	//Affichage debug des machines du pole mine

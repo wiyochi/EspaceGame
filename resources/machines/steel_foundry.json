@@ -1,0 +1,42 @@
+{
+    "in": [
+        [
+            {
+                "item": "iron_liquid",
+                "quantity": 1
+            },
+            {
+                "item": "carbon",
+                "quantity": 2
+            }
+        ],
+        [
+            {
+                "item": "copper_liquid",
+                "quantity": 1
+            },
+            {
+                "item": "carbon",
+                "quantity": 2
+            }
+        ]
+    ],
+    "out": [
+      {
+        "item": "steel_plate",
+        "quantity": 1
+      },
+      {
+        "item": "testCopper_plate",
+        "quantity": 1
+      }
+    ],
+      "energy": 25,
+      "shape": [
+        [ 1, 0 ],
+        [ 1, 1 ],
+        [ 2, 1 ],
+        [ 0, 1 ]
+      ],
+      "texture": ""
+    }

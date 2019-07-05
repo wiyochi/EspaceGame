@@ -1,6 +1,24 @@
 {
-    "in": ["iron_ore", "copper_ore"],
-    "out": ["iron_liquid", "copper_liquid"],
+  "in": [
+    {
+      "item": "iron_ore",
+      "quantity": 1
+    },
+    {
+      "item": "copper_ore",
+      "quantity": 1
+    }
+  ],
+  "out": [
+    {
+      "item": "iron_liquid",
+      "quantity": 1
+    },
+    {
+      "item": "copper_liquid",
+      "quantity": 1
+    }
+  ],
     "energy": 25,
     "shape": [
       [ 1, 0 ],

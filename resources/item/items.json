@@ -2,7 +2,7 @@
     "items": [
         {
             "class": "null",
-            "name": "",
+            "name": "null",
             "texture": ""
         },
         {
@@ -33,6 +33,21 @@
         {
             "class": "plate",
             "name": "copper_plate",
+            "texture": ""
+        },
+        {
+            "class": "molecule",
+            "name": "carbon",
+            "texture": ""
+        },
+        {
+            "class": "plate",
+            "name": "steel_plate",
+            "texture": ""
+        },
+        {
+            "class": "plate",
+            "name": "testCopper_plate",
             "texture": ""
         }
     ]

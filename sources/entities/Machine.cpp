@@ -1,9 +1,9 @@
 #include "Machine.hpp"
 
-Machine::Machine(std::string filename_texture, Item* in, Item* out, float energy) :
+Machine::Machine(std::string filename_texture, float energy) :
 	m_position(sf::Vector2i(0, 0)),
-	m_itemIn(in),
-	m_itemOut(out),
+	m_setIn(nullptr),
+	m_setOut(nullptr),
 	m_energy(energy)
 {
 	if (!m_texture.loadFromFile(filename_texture))
@@ -29,12 +29,26 @@ sf::Vector2i Machine::getPosition()
 	return m_position;
 }
 
+void Machine::setIn(ItemSet* set)
+{
+	if(m_setIn != nullptr)
+		delete m_setIn;
+	m_setIn = set;
+}
+
+void Machine::setOut(ItemSet* set)
+{
+	if(m_setOut != nullptr)
+		delete m_setOut;
+	m_setOut = set;
+}
+
 std::ostream& operator<<(std::ostream& out, Machine& m)
 {
 	out << "Machine(" << &m;
-	out << "): in[\"" << m.m_itemIn->getName();
-	out << "\"]out[\"" << m.m_itemOut->getName();
-	out << "\"]energy[" << m.m_energy;
+	out << "): in" << *(m.m_setIn);
+	out << "out" << *(m.m_setOut);
+	out << "energy[" << m.m_energy;
 	out << "]shape[";
 	for (size_t i = 0; i < m.m_shape.size(); i++)
 		out << "[" << m.m_shape[i].x << "," << m.m_shape[i].y << "]";

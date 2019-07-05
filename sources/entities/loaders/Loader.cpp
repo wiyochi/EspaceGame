@@ -27,17 +27,46 @@ namespace Loader
 		return d;
 	}
 
+	ItemSet* loadItemSet(rapidjson::Value& arrayItemSet)
+	{
+		std::vector<std::vector<Item*>> items;
+		std::vector<std::vector<int>> quantity;
+		for (rapidjson::SizeType i = 0; i < arrayItemSet.Size(); i++)
+		{
+			std::vector<Item*> vec;
+			std::vector<int> vecInt;
+			if(arrayItemSet[i].GetType() == rapidjson::Type::kArrayType)
+			{
+				for (rapidjson::SizeType j = 0; j < arrayItemSet[i].Size(); j++)
+				{
+					vec.push_back(Item::findItem(arrayItemSet[i][j]["item"].GetString()));
+					vecInt.push_back(arrayItemSet[i][j]["quantity"].GetInt());
+				}
+			}
+			else
+			{
+				vec.push_back(Item::findItem(arrayItemSet[i]["item"].GetString()));
+				vecInt.push_back(arrayItemSet[i]["quantity"].GetInt());
+			}
+			items.push_back(vec);
+			quantity.push_back(vecInt);
+		}
+		return new ItemSet(items, quantity);
+	}
+
 	Machine* loadMachine(std::string JSonFile)
 	{
 		rapidjson::Document d = getDocument(JSonFile);
 
-		Item*				in			= Item::findItem(d["in"].GetString());
-		Item*				out			= Item::findItem(d["out"].GetString());
+		ItemSet*			in			= loadItemSet(d["in"]);
+		ItemSet*			out			= loadItemSet(d["out"]);
 		int					energy		= d["energy"].GetInt();
 		std::string			texture		= d["texture"].GetString();
 		rapidjson::Value&	vertexArray	= d["shape"];
 
-		Machine* machine = new Machine(texture, in, out, energy);
+		Machine* machine = new Machine(texture, energy);
+		machine->setIn(in);
+		machine->setOut(out);
 
 		std::vector<sf::Vector2i>& machineShape = machine->getShape();
 		for (rapidjson::SizeType i = 0; i < vertexArray.Size(); i++)
