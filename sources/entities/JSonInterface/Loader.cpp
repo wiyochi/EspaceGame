@@ -87,7 +87,7 @@ namespace Loader
 		rapidjson::Value& machineArray = d["mine"]["machines"];
 		for (rapidjson::SizeType i = 0; i < machineArray.Size(); i++)
 		{
-			std::string str = "resources/machines/";
+			std::string str = MACHINE_PATH;
 			str.append(machineArray[i]["machine"].GetString());
 			str.append(".json");
 			Machine* m = loadMachine(str);

@@ -10,16 +10,10 @@
                 "quantity": 2
             }
         ],
-        [
-            {
-                "item": "copper_liquid",
-                "quantity": 1
-            },
-            {
-                "item": "carbon",
-                "quantity": 2
-            }
-        ]
+        {
+            "item": "copper_liquid",
+            "quantity": 1
+        }
     ],
     "out": [
       {

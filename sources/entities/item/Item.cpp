@@ -13,6 +13,14 @@ Item* Item::findItem(std::string name)
 	return item;
 }
 
+void Item::deleteItems()
+{
+	for(auto item : items)
+	{
+		delete item;
+	}
+}
+
 Item::Item(std::string name, std::string className, std::string textureFileName) :
 	m_name(name),
 	m_className(className)

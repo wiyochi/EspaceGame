@@ -32,18 +32,18 @@
     "machines": [
       {
         "machine": "iron_drill",
-        "x": 2,
-        "y": 2
+        "x": 3,
+        "y": 3
       },
       {
         "machine": "iron_drill",
-        "x": 5,
-        "y": 4
+        "x": 0,
+        "y": 0
       },
       {
         "machine": "copper_drill",
-        "x": 16,
-        "y": 11
+        "x": 10,
+        "y": 10
       }
     ]
   }

@@ -12,6 +12,8 @@ Machine::Machine(std::string filename_texture, float energy) :
 
 Machine::~Machine()
 {
+	delete m_setIn;
+	delete m_setOut;
 }
 
 std::vector<sf::Vector2i>& Machine::getShape()

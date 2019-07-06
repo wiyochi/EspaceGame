@@ -8,6 +8,8 @@
 #include "../map/Grid.hpp"
 #include "../item/ItemSet.hpp"
 
+#define MACHINE_PATH "resources/machines/"
+
 namespace Loader
 {
 	rapidjson::Document getDocument(std::string JSonFile);

@@ -9,6 +9,7 @@ class Item
 public:
 	static std::vector<Item*> items;
 	static Item* findItem(std::string name);
+	static void deleteItems();
 
 	Item(std::string name, std::string className, std::string textureFileName);
 	~Item();

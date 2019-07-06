@@ -19,6 +19,10 @@ Grid::Grid(int width, int height, sf::Vector2f squareSize) :
 
 Grid::~Grid()
 {
+	for(auto machine : m_machines)
+	{
+		delete machine;
+	}
 }
 
 // TODO: faire les v�rif n�cessaires

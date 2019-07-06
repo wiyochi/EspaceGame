@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <SFML/Graphics.hpp>
-#include "entities/loaders/Loader.hpp"
+#include "entities/JSonInterface/Loader.hpp"
 #include "entities/map/Grid.hpp"
 
 int main()
@@ -11,7 +11,7 @@ int main()
 	sf::View v;
 	float viewSpeed = 0.1f;
 
-	Grid* poles[4];
+	Grid* poles[4] = { nullptr };
 
 	Loader::loadItems("resources/item/items.json");
 	Loader::loadSave("resources/saves/saveTest.json", poles);
@@ -72,6 +72,17 @@ int main()
 		window.draw(*(poles[0]));
 		window.display();
 	}
+
+	// Liberation memoire des poles (machines)
+	for(size_t i = 0; i < 4; i++)
+	{
+		if(poles[i] != nullptr)
+			delete poles[i];
+	}
+
+	// Liberation memoire des items
+	Item::deleteItems();
+	
 
 	return 0;
 }
