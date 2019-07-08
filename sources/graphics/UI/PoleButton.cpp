@@ -1,6 +1,6 @@
 #include "PoleButton.hpp"
 
-PoleButton::PoleButton(int id) : Button("resources/fonts/Roboto-Thin.ttf", L"Pôle ", sf::Vector2f(640, 360))
+PoleButton::PoleButton(int id, sf::RenderWindow & window) : Button(window, "resources/fonts/Roboto-Thin.ttf", L"Pôle ", sf::Vector2f(640, 360)), _map(id, window)
 {
     move(x[id], y[id]);
     
@@ -10,13 +10,15 @@ PoleButton::PoleButton(int id) : Button("resources/fonts/Roboto-Thin.ttf", L"Pô
 
 
 
-void PoleButton::draw(sf::RenderWindow & window) const
+void PoleButton::draw()
 {
-    Button::draw(window);
+    Button::draw();
+    _map.draw();
 }
 
 
 void PoleButton::action()
 {
     std::cout << "Click redef" << std::endl;
+    _map.activeView();
 }

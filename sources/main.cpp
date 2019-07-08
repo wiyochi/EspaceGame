@@ -4,13 +4,15 @@
 
 int main()
 {
-    PoleButton pole1(0);
-    PoleButton pole2(1);
-    PoleButton pole3(2);
-    PoleButton pole4(3);
+    sf::View main_menu_view(sf::FloatRect(0, 0, 1280, 720));
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
     
+    PoleButton pole1(0, window);
+    PoleButton pole2(1, window);
+    PoleButton pole3(2, window);
+    PoleButton pole4(3, window);
     
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
+    window.setView(main_menu_view);
     
 	while (window.isOpen())
 	{
@@ -38,10 +40,10 @@ int main()
 		window.clear();
         
         
-        pole1.draw(window);
-        pole2.draw(window);
-        pole3.draw(window);
-        pole4.draw(window);
+        pole1.draw();
+        pole2.draw();
+        pole3.draw();
+        pole4.draw();
         
 		window.display();
 	}

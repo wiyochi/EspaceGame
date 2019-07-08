@@ -2,7 +2,7 @@
 
 std::vector<Button*> Button::_buttons; 
 
-Button::Button(std::string fontName, sf::String text, sf::Vector2f size) : _shape(size)
+Button::Button(sf::RenderWindow & window, std::string fontName, sf::String text, sf::Vector2f size) : _shape(size), _window(window)
 {
     if (!_font.loadFromFile(fontName))
     {
@@ -18,10 +18,10 @@ Button::Button(std::string fontName, sf::String text, sf::Vector2f size) : _shap
     _shape.setFillColor(sf::Color::Blue);
 }
 
-void Button::draw(sf::RenderWindow & window) const
+void Button::draw()
 {
-    window.draw(_shape);
-    window.draw(_text);
+    _window.draw(_shape);
+    _window.draw(_text);
 }
 
 void Button::move(float offsetX, float offsetY)
