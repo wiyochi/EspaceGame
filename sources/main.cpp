@@ -2,6 +2,7 @@
 #include <fstream>
 #include <SFML/Graphics.hpp>
 #include "entities/JSonInterface/Loader.hpp"
+#include "entities/JSonInterface/Writer.hpp"
 #include "entities/map/Grid.hpp"
 
 int main()
@@ -15,6 +16,8 @@ int main()
 
 	Loader::loadItems("resources/item/items.json");
 	Loader::loadSave("resources/saves/saveTest.json", poles);
+
+	bool stop = false;
 
     //Affichage debug des items load
 	for(unsigned int i = 0; i < Item::items.size(); i++)
@@ -55,6 +58,16 @@ int main()
 			default:
 				break;
 			}
+		}
+
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::S) && !stop)
+		{
+			stop = true;
+			Writer::save("resources/saves/testWriter.json", poles);
+		}
+		else if(!sf::Keyboard::isKeyPressed(sf::Keyboard::S) && stop)
+		{
+			stop = false;
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))

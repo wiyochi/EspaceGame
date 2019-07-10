@@ -16,6 +16,16 @@ Machine::~Machine()
 	delete m_setOut;
 }
 
+std::string Machine::getName()
+{
+	return m_name;
+}
+
+void Machine::setName(std::string name)
+{
+	m_name = name;
+}
+
 std::vector<sf::Vector2i>& Machine::getShape()
 {
 	return m_shape;

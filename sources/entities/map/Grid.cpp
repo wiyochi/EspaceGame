@@ -25,6 +25,16 @@ Grid::~Grid()
 	}
 }
 
+std::string Grid::getName()
+{
+	return m_name;
+}
+
+void Grid::setName(std::string name)
+{
+	m_name = name;
+}
+
 // TODO: faire les v�rif n�cessaires
 void Grid::addMachine(Machine* machine)
 {

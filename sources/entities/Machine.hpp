@@ -11,6 +11,8 @@ class Machine : public sf::Drawable
 public:
 	Machine(std::string filename_texture, float energy);
 	~Machine();
+	std::string					getName		();
+	void						setName		(std::string name);
 	std::vector<sf::Vector2i>& 	getShape	();
 	void 						setPosition	(sf::Vector2i newPos);
 	sf::Vector2i 				getPosition	();
@@ -20,6 +22,7 @@ public:
 	friend std::ostream& operator<<(std::ostream& out, Machine& m);
 
 private:
+	std::string					m_name;
 	sf::Texture					m_texture;
 	sf::Vector2i				m_position;
 	ItemSet*					m_setIn;

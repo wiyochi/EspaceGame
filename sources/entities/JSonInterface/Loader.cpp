@@ -84,6 +84,7 @@ namespace Loader
 
 		// Pole mine
 		poles[0] = new Grid(20, 20, sf::Vector2f(50.f, 50.f));
+		poles[0]->setName("mine");
 		rapidjson::Value& machineArray = d["mine"]["machines"];
 		for (rapidjson::SizeType i = 0; i < machineArray.Size(); i++)
 		{
@@ -91,6 +92,7 @@ namespace Loader
 			str.append(machineArray[i]["machine"].GetString());
 			str.append(".json");
 			Machine* m = loadMachine(str);
+			m->setName(machineArray[i]["machine"].GetString());
 			m->setPosition(sf::Vector2i(machineArray[i]["x"].GetInt(), machineArray[i]["y"].GetInt()));
 			poles[0]->addMachine(m);
 		}

@@ -8,16 +8,19 @@ class Grid : public sf::Drawable
 public:
 	Grid(int width, int height, sf::Vector2f squareSize);
 	~Grid();
-	void addMachine(Machine* machine);
-	std::vector<Machine*>& getMachines();
+	std::string				getName		();
+	void					setName		(std::string name);
+	void 					addMachine	(Machine* machine);
+	std::vector<Machine*>& 	getMachines	();
 
 private:
-	int m_width;
-	int m_height;
-	sf::Vector2f m_squareSize;
-	std::vector<sf::Vertex> m_pointStrips;
+	std::string						m_name;
+	int 							m_width;
+	int 							m_height;
+	sf::Vector2f 					m_squareSize;
+	std::vector<sf::Vertex> 		m_pointStrips;
 	std::vector<sf::RectangleShape> m_cases;
-	std::vector<Machine*> m_machines;
+	std::vector<Machine*>			m_machines;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
