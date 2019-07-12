@@ -1,19 +1,20 @@
 #include "Grid.hpp"
 
-Grid::Grid(int width, int height, sf::Vector2f squareSize) :
+Grid::Grid(int width, int height, sf::Vector2f offset, sf::Vector2f squareSize) :
 	m_width(width),
 	m_height(height),
+	m_offset(offset),
 	m_squareSize(squareSize)
 {
 	for (int i = 0; i < (m_width + 1); i++)
 	{
-		m_pointStrips.push_back(sf::Vertex(sf::Vector2f(i * m_squareSize.x, 0.f), sf::Color::Blue));
-		m_pointStrips.push_back(sf::Vertex(sf::Vector2f(i * m_squareSize.x, m_height * m_squareSize.y), sf::Color::Blue));
+		m_pointStrips.push_back(sf::Vertex(sf::Vector2f(m_offset.x + i * m_squareSize.x, m_offset.y), sf::Color::Blue));
+		m_pointStrips.push_back(sf::Vertex(sf::Vector2f(m_offset.x + i * m_squareSize.x, m_offset.y + m_height * m_squareSize.y), sf::Color::Blue));
 	}
 	for (int i = 0; i < (m_height + 1); i++)
 	{
-		m_pointStrips.push_back(sf::Vertex(sf::Vector2f(0.f, i * m_squareSize.y), sf::Color::Blue));
-		m_pointStrips.push_back(sf::Vertex(sf::Vector2f(m_width * m_squareSize.x, i * m_squareSize.y), sf::Color::Blue));
+		m_pointStrips.push_back(sf::Vertex(sf::Vector2f(m_offset.x, m_offset.y + i * m_squareSize.y), sf::Color::Blue));
+		m_pointStrips.push_back(sf::Vertex(sf::Vector2f(m_offset.x + m_width * m_squareSize.x, m_offset.y + i * m_squareSize.y), sf::Color::Blue));
 	}
 }
 
@@ -45,7 +46,7 @@ void Grid::addMachine(Machine* machine)
 	for (unsigned int i = 0; i < machineShape.size(); i++)
 	{
 		m_cases.push_back(sf::RectangleShape(m_squareSize));
-		m_cases[m_cases.size() - 1].setPosition(sf::Vector2f((pos.x + machineShape[i].x) * m_squareSize.x, (pos.y + machineShape[i].y) * m_squareSize.y));
+		m_cases[m_cases.size() - 1].setPosition(sf::Vector2f(m_offset.x + (pos.x + machineShape[i].x) * m_squareSize.x, m_offset.y + (pos.y + machineShape[i].y) * m_squareSize.y));
 		m_cases[m_cases.size() - 1].setFillColor(sf::Color::Red);
 	}
 }

@@ -25,13 +25,15 @@ int main()
 		std::cout << "Item " << i << ": " << *(Item::items[i]) << std::endl;
 	}
 
-	//Affichage debug des machines du pole mine
-	std::vector<Machine*> machines = poles[0]->getMachines();
-	for(unsigned int i = 0; i < machines.size(); i++)
+	//Affichage debug des machines des poles
+	for (size_t i = 0; i < 4; i++)
 	{
-		std::cout << "Machine " << i << ": " << *(machines[i]) << std::endl;
+		std::cout << "Pole " << poles[i]->getName() << std::endl;
+		for(const auto machine : poles[i]->getMachines())
+		{
+			std::cout << *(machine) << std::endl;
+		}
 	}
-    
 
 	while (window.isOpen())
 	{
@@ -55,6 +57,10 @@ int main()
 					viewSpeed *= 0.9f;
 				}
 				break;
+			case sf::Event::KeyReleased:
+				if(event.key.code == sf::Keyboard::Escape)
+					window.close();
+				break;
 			default:
 				break;
 			}
@@ -63,6 +69,7 @@ int main()
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::S) && !stop)
 		{
 			stop = true;
+			std::cout << "Sauvegarde..." << std::endl;
 			Writer::save("resources/saves/testWriter.json", poles);
 		}
 		else if(!sf::Keyboard::isKeyPressed(sf::Keyboard::S) && stop)
@@ -82,7 +89,9 @@ int main()
 		window.setView(v);
 
 		window.clear();
-		window.draw(*(poles[0]));
+		//window.draw(*(poles[0]));
+		for (size_t i = 0; i < 4; i++)
+			window.draw(*(poles[i]));
 		window.display();
 	}
 

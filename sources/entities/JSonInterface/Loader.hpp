@@ -17,6 +17,7 @@ namespace Loader
 	ItemSet* loadItemSet(rapidjson::Value& arrayItemSet);
 	Machine* loadMachine(std::string JSonFile);
 	void loadSave(std::string JSonFile, Grid* poles[4]);
+	void loadMachineArray(rapidjson::Value& machineArray, Grid* pole);
 	void loadItems(std::string JSonFile);
 };
 

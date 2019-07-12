@@ -46,5 +46,43 @@
         "y": 10
       }
     ]
+  },
+  "garage": {
+    "machines": [
+      {
+        "machine": "iron_drill",
+        "x": 3,
+        "y": 3
+      },
+      {
+        "machine": "iron_drill",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "machine": "copper_drill",
+        "x": 10,
+        "y": 10
+      }
+    ]
+  },
+  "energy": {
+    "machines": [
+      {
+        "machine": "iron_drill",
+        "x": 3,
+        "y": 3
+      },
+      {
+        "machine": "iron_drill",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "machine": "copper_drill",
+        "x": 10,
+        "y": 10
+      }
+    ]
   }
 }

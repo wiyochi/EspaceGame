@@ -83,9 +83,32 @@ namespace Loader
 		rapidjson::Document d = getDocument(JSonFile);
 
 		// Pole mine
-		poles[0] = new Grid(20, 20, sf::Vector2f(50.f, 50.f));
+		poles[0] = new Grid(20, 20, sf::Vector2f(0.f, 0.f), sf::Vector2f(20.f, 20.f));
 		poles[0]->setName("mine");
 		rapidjson::Value& machineArray = d["mine"]["machines"];
+		loadMachineArray(machineArray, poles[0]);
+
+		// Pole factory
+		poles[1] = new Grid(20, 20, sf::Vector2f(410.f, 0.f), sf::Vector2f(20.f, 20.f));
+		poles[1]->setName("factory");
+		machineArray = d["factory"]["machines"];
+		loadMachineArray(machineArray, poles[1]);
+
+		// Pole garage
+		poles[2] = new Grid(20, 20, sf::Vector2f(0.f, 410.f), sf::Vector2f(20.f, 20.f));
+		poles[2]->setName("garage");
+		machineArray = d["garage"]["machines"];
+		loadMachineArray(machineArray, poles[2]);
+
+		// Pole energy
+		poles[3] = new Grid(20, 20, sf::Vector2f(410.f, 410.f), sf::Vector2f(20.f, 20.f));
+		poles[3]->setName("energy");
+		machineArray = d["energy"]["machines"];
+		loadMachineArray(machineArray, poles[3]);
+	}
+
+	void loadMachineArray(rapidjson::Value& machineArray, Grid* pole)
+	{
 		for (rapidjson::SizeType i = 0; i < machineArray.Size(); i++)
 		{
 			std::string str = MACHINE_PATH;
@@ -94,7 +117,7 @@ namespace Loader
 			Machine* m = loadMachine(str);
 			m->setName(machineArray[i]["machine"].GetString());
 			m->setPosition(sf::Vector2i(machineArray[i]["x"].GetInt(), machineArray[i]["y"].GetInt()));
-			poles[0]->addMachine(m);
+			pole->addMachine(m);
 		}
 	}
 
