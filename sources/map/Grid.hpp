@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <SFML/Graphics.hpp>
-#include "../Machine.hpp"
+#include "../machine/Machine.hpp"
 
 class Grid : public sf::Drawable
 {

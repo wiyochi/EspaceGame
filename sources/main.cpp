@@ -1,9 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <SFML/Graphics.hpp>
-#include "entities/JSonInterface/Loader.hpp"
-#include "entities/JSonInterface/Writer.hpp"
-#include "entities/map/Grid.hpp"
+#include "JSonInterface/Loader.hpp"
+#include "JSonInterface/Writer.hpp"
+#include "map/Grid.hpp"
 
 int main()
 {
@@ -89,7 +89,6 @@ int main()
 		window.setView(v);
 
 		window.clear();
-		//window.draw(*(poles[0]));
 		for (size_t i = 0; i < 4; i++)
 			window.draw(*(poles[i]));
 		window.display();

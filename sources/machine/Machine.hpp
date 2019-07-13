@@ -3,8 +3,8 @@
 #include <iostream>
 #include <vector>
 #include <SFML/Graphics.hpp>
-#include "item/Item.hpp"
-#include "item/ItemSet.hpp"
+#include "../item/Item.hpp"
+#include "../item/ItemSet.hpp"
 
 class Machine : public sf::Drawable
 {
