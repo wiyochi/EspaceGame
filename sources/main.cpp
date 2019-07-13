@@ -4,6 +4,8 @@
 #include "JSonInterface/Loader.hpp"
 #include "JSonInterface/Writer.hpp"
 #include "map/Grid.hpp"
+#include "skillTree/Tree.hpp"
+#include "skillTree/Node.hpp"
 
 int main()
 {
@@ -34,6 +36,26 @@ int main()
 			std::cout << *(machine) << std::endl;
 		}
 	}
+
+	Tree* t = new Tree();
+	t->addSkill("sediment", "description de sediment");
+	t->addSkill("miningDepth", "description de miningDepth");
+	Node* cru = t->addSkill("crushing", "description de crushing");
+	(*t)["crushing"]->addNeededNode((*t)["sediment"], 2);
+	(*t)["crushing"]->addNeededNode((*t)["miningDepth"], 3);
+
+	(*t)["sediment"]->increase();
+	(*t)["miningDepth"]->increase();
+	(*t)["miningDepth"]->increase();
+	(*t)["miningDepth"]->increase();
+	(*t)["miningDepth"]->increase();
+
+	(*t)["crushing"]->increase();
+	std::cout << "### AVANT ###" << std::endl << *t << std::endl;
+
+	(*t)["sediment"]->increase();
+	(*t)["crushing"]->increase();
+	std::cout << "### APRES ###" << std::endl << *t << std::endl;
 
 	while (window.isOpen())
 	{

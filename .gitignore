@@ -1,5 +1,6 @@
 bin/
 .vs/
+.vscode/
 EspaceGame.sln
 EspaceGame.vcxproj
 EspaceGame.vcxproj.filters
