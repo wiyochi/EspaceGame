@@ -71,10 +71,12 @@ void Node::increase()
 
 std::ostream& operator<<(std::ostream& out, Node& node)
 {
-    out << "Node " << node.m_name << ": " << std::endl;
-    out << "Description: " << node.m_description << std::endl;
-    out << "Quantity: " << node.m_quantity << std::endl;
+    out << "Node " << node.m_name << "(" << &node << "): ";
+    out << "Description[\"" << node.m_description << "\"]";
+    out << "Quantity[" << node.m_quantity << "]";
+    out << "NeededNode[";
     for (const auto nn : node.m_need)
-        out << "  " << nn->node->m_name << ": (" << nn->neededQuantity << "," << nn->actualQuantity << ")" << std::endl;
+        out << "(" << nn->node->m_name << "," << nn->neededQuantity << "," << nn->actualQuantity << ")";
+    out << "]";
     return out;
 }

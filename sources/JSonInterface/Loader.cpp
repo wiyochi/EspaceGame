@@ -60,7 +60,7 @@ namespace Loader
 
 		ItemSet*			in			= loadItemSet(d["in"]);
 		ItemSet*			out			= loadItemSet(d["out"]);
-		int					energy		= d["energy"].GetInt();
+		float				energy		= d["energy"].GetFloat();
 		std::string			texture		= d["texture"].GetString();
 		rapidjson::Value&	vertexArray	= d["shape"];
 
@@ -74,7 +74,6 @@ namespace Loader
 			rapidjson::Value& vertex = vertexArray[i];
 			machineShape.push_back(sf::Vector2i(vertex[0].GetInt(), vertex[1].GetInt()));
 		}
-
 		return machine;
 	}
 

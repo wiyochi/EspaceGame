@@ -28,6 +28,6 @@ Node* Tree::operator[](std::string name)
 std::ostream& operator<<(std::ostream& out, Tree& t)
 {
     for(const auto node : t.m_tree)
-        out << *node;
+        out << *node << std::endl;
     return out;
 }

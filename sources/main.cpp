@@ -17,7 +17,7 @@ int main()
 	Grid* poles[4] = { nullptr };
 
 	Loader::loadItems("resources/item/items.json");
-	Loader::loadSave("resources/saves/saveTest.json", poles);
+	Loader::loadSave("resources/save/saveTest.json", poles);
 	Tree* t = Loader::loadSkillTree("resources/skillTree/test.json");
 
 	bool stop = false;
@@ -37,15 +37,6 @@ int main()
 			std::cout << *(machine) << std::endl;
 		}
 	}
-
-	/*
-	Tree* t = new Tree();
-	t->addSkill("sediment", "description de sediment");
-	t->addSkill("miningDepth", "description de miningDepth");
-	Node* cru = t->addSkill("crushing", "description de crushing");
-	(*t)["crushing"]->addNeededNode((*t)["sediment"], 2);
-	(*t)["crushing"]->addNeededNode((*t)["miningDepth"], 3);
-	*/
 
 	(*t)["sediment"]->increase();
 	(*t)["miningDepth"]->increase();
@@ -95,7 +86,7 @@ int main()
 		{
 			stop = true;
 			std::cout << "Sauvegarde..." << std::endl;
-			Writer::save("resources/saves/testWriter.json", poles);
+			Writer::save("resources/save/testWriter.json", poles);
 		}
 		else if(!sf::Keyboard::isKeyPressed(sf::Keyboard::S) && stop)
 		{

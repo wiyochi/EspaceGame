@@ -10,7 +10,7 @@
 #include "../skillTree/Node.hpp"
 #include "../skillTree/Tree.hpp"
 
-#define MACHINE_PATH "resources/machines/"
+#define MACHINE_PATH "resources/machine/"
 
 namespace Loader
 {
