@@ -18,6 +18,7 @@ int main()
 
 	Loader::loadItems("resources/item/items.json");
 	Loader::loadSave("resources/saves/saveTest.json", poles);
+	Tree* t = Loader::loadSkillTree("resources/skillTree/test.json");
 
 	bool stop = false;
 
@@ -37,12 +38,14 @@ int main()
 		}
 	}
 
+	/*
 	Tree* t = new Tree();
 	t->addSkill("sediment", "description de sediment");
 	t->addSkill("miningDepth", "description de miningDepth");
 	Node* cru = t->addSkill("crushing", "description de crushing");
 	(*t)["crushing"]->addNeededNode((*t)["sediment"], 2);
 	(*t)["crushing"]->addNeededNode((*t)["miningDepth"], 3);
+	*/
 
 	(*t)["sediment"]->increase();
 	(*t)["miningDepth"]->increase();
@@ -126,6 +129,7 @@ int main()
 	// Liberation memoire des items
 	Item::deleteItems();
 	
+	delete t;
 
 	return 0;
 }

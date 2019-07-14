@@ -1,0 +1,28 @@
+{
+    "tree": [
+        {
+            "name": "sediment",
+            "description": "Amélioration du minage de sédiments",
+            "need": []
+        },
+        {
+            "name": "miningDepth",
+            "description": "Amélioration du minage en profondeur",
+            "need": []
+        },
+        {
+            "name": "crushing",
+            "description": "concassage",
+            "need": [
+                {
+                    "name": "sediment",
+                    "quantity": 2
+                },
+                {
+                    "name": "miningDepth",
+                    "quantity": 3
+                }
+            ]
+        }
+    ]
+}

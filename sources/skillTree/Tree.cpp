@@ -6,6 +6,8 @@ Tree::Tree()
 
 Tree::~Tree()
 {
+    for(const auto skill : m_tree)
+        delete skill;
 }
 
 Node* Tree::addSkill(std::string name, std::string description)

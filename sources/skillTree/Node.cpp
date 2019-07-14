@@ -28,9 +28,12 @@ std::string Node::getName()
 
 void Node::addNeededNode(Node* node, int neededQuantity)
 {
-    node->addChild(this);
-    NeededNode* n = new NeededNode(node, neededQuantity);
-    m_need.push_back(n);
+    if(node)
+    {
+        node->addChild(this);
+        NeededNode* n = new NeededNode(node, neededQuantity);
+        m_need.push_back(n);
+    }
 }
 
 void Node::addChild(Node* node)

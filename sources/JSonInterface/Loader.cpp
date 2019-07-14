@@ -129,4 +129,21 @@ namespace Loader
 		for (rapidjson::SizeType i = 0; i < itemsArray.Size(); i++)
 			new Item(itemsArray[i]["name"].GetString(), itemsArray[i]["class"].GetString(), itemsArray[i]["texture"].GetString());
 	}
+
+	Tree* loadSkillTree(std::string JSonFile)
+	{
+		rapidjson::Document d = getDocument(JSonFile);
+		Tree* tree = new Tree();
+
+		rapidjson::Value& nodesArray = d["tree"];
+		for (rapidjson::SizeType i = 0; i < nodesArray.Size(); i++)
+		{
+			std::string name = nodesArray[i]["name"].GetString();
+			tree->addSkill(name, nodesArray[i]["description"].GetString());
+			rapidjson::Value& needArray = nodesArray[i]["need"];
+			for (rapidjson::SizeType j = 0; j < needArray.Size(); j++)
+				(*tree)[name]->addNeededNode((*tree)[needArray[j]["name"].GetString()], needArray[j]["quantity"].GetInt());
+		}
+		return tree;
+	}
 }
