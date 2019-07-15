@@ -1,7 +1,8 @@
 bin/
 .vs/
+.vscode/
 EspaceGame.sln
 EspaceGame.vcxproj
 EspaceGame.vcxproj.filters
 EspaceGame.vcxproj.user
-rapidjson/
+.vscode

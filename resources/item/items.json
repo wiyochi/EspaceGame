@@ -1,0 +1,54 @@
+{
+    "items": [
+        {
+            "class": "null",
+            "name": "null",
+            "texture": ""
+        },
+        {
+            "class": "ore",
+            "name": "iron_ore",
+            "texture": ""
+        },
+        {
+            "class": "ore",
+            "name": "copper_ore",
+            "texture": ""
+        },
+        {
+            "class": "liquid_ore",
+            "name": "copper_liquid",
+            "texture": ""
+        },
+        {
+            "class": "liquid_ore",
+            "name": "iron_liquid",
+            "texture": ""
+        },
+        {
+            "class": "plate",
+            "name": "iron_plate",
+            "texture": ""
+        },
+        {
+            "class": "plate",
+            "name": "copper_plate",
+            "texture": ""
+        },
+        {
+            "class": "molecule",
+            "name": "carbon",
+            "texture": ""
+        },
+        {
+            "class": "plate",
+            "name": "steel_plate",
+            "texture": ""
+        },
+        {
+            "class": "plate",
+            "name": "testCopper_plate",
+            "texture": ""
+        }
+    ]
+}

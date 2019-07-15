@@ -1,0 +1,22 @@
+{
+  "in": [
+    {
+      "item": "null",
+      "quantity": 0
+    }
+  ],
+  "out": [
+    {
+      "item": "iron_ore",
+      "quantity": 1
+    }
+  ],
+  "energy": 25,
+  "shape": [
+    [ 1, 0 ],
+    [ 1, 1 ],
+    [ 2, 1 ],
+    [ 0, 1 ]
+  ],
+  "texture": ""
+}
