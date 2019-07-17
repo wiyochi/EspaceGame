@@ -20,6 +20,7 @@ int main()
 	Loader::loadSave("resources/save/saveTest.json", poles);
 	Tree* t = Loader::loadSkillTree("resources/skillTree/test.json");
 	t->setPosition(sf::Vector2f(900.f, 20.f));
+	t->initLinks();
 
 	bool stop = false;
 

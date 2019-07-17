@@ -8,11 +8,14 @@ NeededNode::NeededNode(Node* n, int nQ) :
 }
 
 
+bool Node::static_dragAndDropOn = false;
+
 Node::Node(std::string name, std::string description) :
     m_name(name),
     m_description(description),
     m_quantity(0),
-    m_stop(false)
+	m_rightClickPressed(false),
+	m_dragAndDropOn(false)
 {
     m_shape.setFillColor(sf::Color::Red);
     m_shape.setOutlineColor(sf::Color::White);
@@ -91,32 +94,63 @@ bool Node::isIn(sf::Vector2f point)
     return m_shape.getGlobalBounds().contains(point);
 }
 
-void Node::update(sf::RenderWindow& window)
+bool Node::update(sf::RenderWindow& window)
 {
     if(isIn(window.mapPixelToCoords(sf::Mouse::getPosition(window))))
-    {
+	{
         m_shape.setOutlineThickness(2);
-        if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && !m_stop)
+
+		// Right click to increase and print into console
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Right) && !m_rightClickPressed)
         {
             increase();
-            m_stop = true;
-            std::cout << *this << std::endl;
+			std::cout << *this << std::endl;
+			m_rightClickPressed = true;
         }
-        else if(!sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        else if (!sf::Mouse::isButtonPressed(sf::Mouse::Right))
         {
-            m_stop = false;
+			m_rightClickPressed = false;
         }
         
+		// Left click to drag and drop
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !static_dragAndDropOn)
+		{
+			static_dragAndDropOn = true;
+			m_dragAndDropOn = true;
+		}
+		else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			static_dragAndDropOn = false;
+			m_dragAndDropOn = false;
+		}
     }
     else
     {
         m_shape.setOutlineThickness(0);
     }
+
+	if (m_dragAndDropOn)
+	{
+		m_shape.setPosition(window.mapPixelToCoords(sf::Mouse::getPosition(window)) - sf::Vector2f(m_shape.getRadius(), m_shape.getRadius()));
+	}
+
+	return m_dragAndDropOn;
+}
+
+const std::vector<Node*>& Node::getChildren()
+{
+	return m_children;
+}
+
+sf::Vector2f Node::getPosition()
+{
+	return m_shape.getPosition() + sf::Vector2f(m_shape.getRadius(), m_shape.getRadius());
 }
 
 void Node::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    target.draw(&m_childrenLink[0], m_childrenLink.size(), sf::Lines);
+	if(m_childrenLink.size() > 0)
+		target.draw(&m_childrenLink[0], m_childrenLink.size(), sf::Lines);
     target.draw(m_shape, states);
 }
 

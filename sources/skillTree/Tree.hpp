@@ -41,15 +41,23 @@ public:
     Tree();
     ~Tree();
     Node*   addSkill    (std::string name, std::string description);
+
+	// ### Pour l'affichage de débug
     void    setPosition (sf::Vector2f pos);
     void    update      (sf::RenderWindow& window);
+	void	initLinks	();
+	// ###
 
     Node* operator[](std::string name);
     friend std::ostream& operator<<(std::ostream& out, Tree& t);
 
 private:
-    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    std::vector<Node*>		m_tree;
 
-    std::vector<Node*>  m_tree;
-    sf::Vector2f        m_origin;
+	// ### Pour l'affichage de débug
+    sf::Vector2f			m_origin;
+	std::vector<sf::Vertex>	m_links;
+
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	// ###
 };
