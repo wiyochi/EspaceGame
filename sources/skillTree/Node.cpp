@@ -11,8 +11,12 @@ NeededNode::NeededNode(Node* n, int nQ) :
 Node::Node(std::string name, std::string description) :
     m_name(name),
     m_description(description),
-    m_quantity(0)
+    m_quantity(0),
+    m_stop(false)
 {
+    m_shape.setFillColor(sf::Color::Red);
+    m_shape.setOutlineColor(sf::Color::White);
+    m_shape.setRadius(20.f);
 }
 
 Node::~Node()
@@ -39,6 +43,8 @@ void Node::addNeededNode(Node* node, int neededQuantity)
 void Node::addChild(Node* node)
 {
     m_children.push_back(node);
+    m_childrenLink.push_back(m_shape.getPosition());
+    m_childrenLink.push_back(node->m_shape.getPosition());
 }
 
 void Node::increaseNeeded(Node* node)
@@ -67,6 +73,51 @@ void Node::increase()
             child->increaseNeeded(this);
         }
     }
+}
+
+
+void Node::setRadius(float r)
+{
+    m_shape.setRadius(r);
+}
+
+void Node::setPosition(sf::Vector2f& pos)
+{
+    m_shape.setPosition(pos);
+}
+
+bool Node::isIn(sf::Vector2f point)
+{
+    return m_shape.getGlobalBounds().contains(point);
+}
+
+void Node::update(sf::RenderWindow& window)
+{
+    if(isIn(window.mapPixelToCoords(sf::Mouse::getPosition(window))))
+    {
+        m_shape.setOutlineThickness(2);
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && !m_stop)
+        {
+            increase();
+            m_stop = true;
+            std::cout << *this << std::endl;
+        }
+        else if(!sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            m_stop = false;
+        }
+        
+    }
+    else
+    {
+        m_shape.setOutlineThickness(0);
+    }
+}
+
+void Node::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    target.draw(&m_childrenLink[0], m_childrenLink.size(), sf::Lines);
+    target.draw(m_shape, states);
 }
 
 std::ostream& operator<<(std::ostream& out, Node& node)

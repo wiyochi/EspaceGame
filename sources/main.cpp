@@ -19,6 +19,7 @@ int main()
 	Loader::loadItems("resources/item/items.json");
 	Loader::loadSave("resources/save/saveTest.json", poles);
 	Tree* t = Loader::loadSkillTree("resources/skillTree/test.json");
+	t->setPosition(sf::Vector2f(900.f, 20.f));
 
 	bool stop = false;
 
@@ -102,11 +103,14 @@ int main()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 			v.move(viewSpeed, 0);
 
+		t->update(window);
+
 		window.setView(v);
 
 		window.clear();
 		for (size_t i = 0; i < 4; i++)
 			window.draw(*(poles[i]));
+		window.draw(*t);
 		window.display();
 	}
 
