@@ -20,6 +20,19 @@ Node::Node(std::string name, std::string description) :
     m_shape.setFillColor(sf::Color::Red);
     m_shape.setOutlineColor(sf::Color::White);
     m_shape.setRadius(20.f);
+
+	if (m_font.loadFromFile(FONT_NODE_PATH))
+	{
+		m_text.setFont(m_font);
+		m_text.setFillColor(sf::Color::White);
+		m_text.setString(name);
+		m_text.setStyle(sf::Text::Bold);
+		m_text.setCharacterSize(15);
+	}
+	else
+	{
+		std::cout << "Error to load font for node" << std::endl;
+	}
 }
 
 Node::~Node()
@@ -46,8 +59,6 @@ void Node::addNeededNode(Node* node, int neededQuantity)
 void Node::addChild(Node* node)
 {
     m_children.push_back(node);
-    m_childrenLink.push_back(m_shape.getPosition());
-    m_childrenLink.push_back(node->m_shape.getPosition());
 }
 
 void Node::increaseNeeded(Node* node)
@@ -84,9 +95,10 @@ void Node::setRadius(float r)
     m_shape.setRadius(r);
 }
 
-void Node::setPosition(sf::Vector2f& pos)
+void Node::setPosition(sf::Vector2f pos)
 {
-    m_shape.setPosition(pos);
+	m_shape.setPosition(pos - sf::Vector2f(m_shape.getRadius(), m_shape.getRadius()));
+	m_text.setPosition(pos - sf::Vector2f(m_text.getGlobalBounds().width / 2, m_text.getGlobalBounds().height / 2));
 }
 
 bool Node::isIn(sf::Vector2f point)
@@ -131,7 +143,7 @@ bool Node::update(sf::RenderWindow& window)
 
 	if (m_dragAndDropOn)
 	{
-		m_shape.setPosition(window.mapPixelToCoords(sf::Mouse::getPosition(window)) - sf::Vector2f(m_shape.getRadius(), m_shape.getRadius()));
+		setPosition(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 	}
 
 	return m_dragAndDropOn;
@@ -149,9 +161,8 @@ sf::Vector2f Node::getPosition()
 
 void Node::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	if(m_childrenLink.size() > 0)
-		target.draw(&m_childrenLink[0], m_childrenLink.size(), sf::Lines);
     target.draw(m_shape, states);
+	target.draw(m_text, states);
 }
 
 std::ostream& operator<<(std::ostream& out, Node& node)

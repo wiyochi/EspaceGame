@@ -4,6 +4,8 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 
+constexpr auto FONT_NODE_PATH = R"(resources/fonts/Roboto-Thin.ttf)";
+
 class Node;
 
 struct NeededNode
@@ -14,7 +16,6 @@ struct NeededNode
     int         actualQuantity;
     const int   neededQuantity;
 };
-
 
 class Node : public sf::Drawable
 {
@@ -27,7 +28,7 @@ public:
 
 	// ### Pour l'affichage de débug
     void						setRadius       (float r);
-    void						setPosition     (sf::Vector2f& pos);
+    void						setPosition     (sf::Vector2f pos);
     bool						isIn            (sf::Vector2f point);
     bool						update          (sf::RenderWindow& window);
 	const std::vector<Node*>&	getChildren		();
@@ -48,10 +49,11 @@ private:
 
 	// ### Pour l'affichage de débug
     sf::CircleShape             m_shape;
-    std::vector<sf::Vertex>     m_childrenLink;
 	bool                        m_rightClickPressed;
 	bool						m_dragAndDropOn;
 	static bool					static_dragAndDropOn;
+	sf::Font					m_font;
+	sf::Text					m_text;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	// ###
