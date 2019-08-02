@@ -38,7 +38,7 @@ public:
     friend std::ostream& operator<<(std::ostream& out, Node& node);
 
 private:
-    void        addChild        (Node* node);
+    void        addChild        (Node* node, int neededQuantity);
     void        increaseNeeded  (Node* node);
     
     std::string                 m_name;
@@ -54,6 +54,8 @@ private:
 	static bool					static_dragAndDropOn;
 	sf::Font					m_font;
 	sf::Text					m_text;
+	std::vector<sf::Text>		m_numbers;
+	std::vector<sf::Vertex*>	m_links;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	// ###

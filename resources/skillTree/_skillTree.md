@@ -1,6 +1,7 @@
-===================== Info skillTree =====================
+# Info skillTree
 
-### Forme du JSon ###
+## Forme du JSon
+```json
 {
     "tree": [
         {
@@ -44,8 +45,8 @@
         ...
     ]
 }
-
-### Explications ###
+```
+## Explications
 La valeur "tree" du document json contient un tableau d'objets représentant chacun une compétence.
 Chaque compétence contient:
  - un nom (sous la valeur "name")
@@ -55,9 +56,9 @@ Les objets de compétences requises contiennent:
  - un nom d'une compétence existante (sous la valeur "name")
  - une quantité requise (sous la valeur "quantity")
 
- Ainsi les arbres de compétences sont sous forme de "niveau"
- Le 1er niveau est composé de compétences qui n'ont pas de compétences requises
- Le 2nd niveau est composé de compétences qui ont besoin d'un certain nombre de points dans des compétences de niveau 1
- Le 3e  niveau est composé de compétences qui ont besoin d'un certain nombre de points dans des compétences de niveau 1 et de niveau 2
- ...
+ Ainsi les arbres de compétences sont sous forme de "niveau" :  
+ Le 1er niveau est composé de compétences qui n'ont pas de compétences requises  
+ Le 2nd niveau est composé de compétences qui ont besoin d'un certain nombre de points dans des compétences de niveau 1  
+ Le 3e  niveau est composé de compétences qui ont besoin d'un certain nombre de points dans des compétences de niveau 1 et de niveau 2  
+ ...  
  Le ne  niveau est composé de compétences qui ont besoin d'un certain nombre de points dans des compétences de niveau 1 à (n-1)

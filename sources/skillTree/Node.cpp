@@ -37,6 +37,8 @@ Node::Node(std::string name, std::string description) :
 
 Node::~Node()
 {
+	for (const auto link : m_links)
+		delete[] link;
     for (const auto nn : m_need)
         delete nn;
 }
@@ -50,15 +52,21 @@ void Node::addNeededNode(Node* node, int neededQuantity)
 {
     if(node)
     {
-        node->addChild(this);
+        node->addChild(this, neededQuantity);
         NeededNode* n = new NeededNode(node, neededQuantity);
         m_need.push_back(n);
     }
 }
 
-void Node::addChild(Node* node)
+void Node::addChild(Node* node, int neededQuantity)
 {
     m_children.push_back(node);
+	m_links.push_back(new sf::Vertex[2]);
+	m_links[m_links.size() - 1][1].color = sf::Color::Red;
+	m_numbers.push_back(sf::Text("0/" + std::to_string(neededQuantity), m_font, 15));
+
+	m_numbers[m_numbers.size() - 1].setFillColor(sf::Color::White);
+	m_numbers[m_numbers.size() - 1].setStyle(sf::Text::Bold);
 }
 
 void Node::increaseNeeded(Node* node)
@@ -82,10 +90,16 @@ void Node::increase()
     if(ok)
     {
         m_quantity += 1;
-        for(const auto child : m_children)
+        for (const auto child : m_children)
         {
             child->increaseNeeded(this);
         }
+		for (auto& number : m_numbers)
+		{
+			std::string str = number.getString();
+			std::size_t slash = str.find("/");
+			number.setString(std::to_string(m_quantity) + str.substr(slash));
+		}
     }
 }
 
@@ -99,6 +113,8 @@ void Node::setPosition(sf::Vector2f pos)
 {
 	m_shape.setPosition(pos - sf::Vector2f(m_shape.getRadius(), m_shape.getRadius()));
 	m_text.setPosition(pos - sf::Vector2f(m_text.getGlobalBounds().width / 2, m_text.getGlobalBounds().height / 2));
+	for (const auto link : m_links)
+		link[0].position = pos;
 }
 
 bool Node::isIn(sf::Vector2f point)
@@ -146,6 +162,14 @@ bool Node::update(sf::RenderWindow& window)
 		setPosition(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 	}
 
+	for (size_t i = 0; i < m_children.size(); i++)
+	{
+		m_links[i][1].position = m_children[i]->getPosition();
+		sf::Vector2f ppos = getPosition();					// Parent position
+		sf::Vector2f cpos = m_children[i]->getPosition();	// Children position
+		m_numbers[i].setPosition(sf::Vector2f(ppos.x - ((ppos.x - cpos.x) / 2), ppos.y - ((ppos.y - cpos.y) / 2))); // New position of number -> middle of the link
+	}
+
 	return m_dragAndDropOn;
 }
 
@@ -161,6 +185,11 @@ sf::Vector2f Node::getPosition()
 
 void Node::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	for (size_t i = 0; i < m_links.size(); i++)
+	{
+		target.draw(m_links[i], 2, sf::Lines, states);
+		target.draw(m_numbers[i], states);
+	}
     target.draw(m_shape, states);
 	target.draw(m_text, states);
 }

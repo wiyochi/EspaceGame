@@ -56,7 +56,6 @@ private:
 
 	// ### Pour l'affichage de débug
     sf::Vector2f			m_origin;
-	std::vector<sf::Vertex>	m_links;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	// ###

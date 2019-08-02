@@ -45,7 +45,7 @@ void Tree::update(sf::RenderWindow& window)
 
 void Tree::initLinks()
 {
-	m_links.clear();
+	/*m_links.clear();
 	for (const auto skill : m_tree)
 	{
 		const std::vector<Node*>& children = skill->getChildren();
@@ -55,6 +55,7 @@ void Tree::initLinks()
 			m_links.push_back(sf::Vertex(child->getPosition(), sf::Color::Red));
 		}
 	}
+	*/
 }
 
 Node* Tree::operator[](std::string name)
@@ -75,8 +76,8 @@ std::ostream& operator<<(std::ostream& out, Tree& t)
 
 void Tree::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	if(m_links.size() > 0)
-		target.draw(&m_links[0], m_links.size(), sf::Lines, states);
+	//if(m_links.size() > 0)
+	//	target.draw(&m_links[0], m_links.size(), sf::Lines, states);
     for(const auto node : m_tree)
         target.draw(*node, states);
 }

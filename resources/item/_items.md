@@ -1,6 +1,6 @@
-===================== Info items =====================
-
-### Forme du JSon ###
+# Info items
+## Forme du JSon
+```json
 {
     "items": [
         {
@@ -26,8 +26,8 @@
         ...
     ]
 }
-
-### Explications ###
+```
+## Explications
 La valeur "items" du document JSon contient un tableau d'objets représentants des items
 Chaque objet contient:
  - la classe de l'item (sous la valeur "class")
