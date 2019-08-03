@@ -1,7 +1,8 @@
 #include "TextureManager.hpp"
 
+
 // Get Texture by Name
-sf::Texture* textureManager::getTexture(std::string name) {
+sf::Texture* getTexture(std::string name) {
 
 	// See if we have already loaded this texture
 	if (textures.find(name) != textures.end()) {
@@ -12,7 +13,7 @@ sf::Texture* textureManager::getTexture(std::string name) {
 }
 
 // Assign a Texture a Name (for accessing via get) and path (to load from)
-sf::Texture* textureManager::loadTexture(std::string name, std::string path) {
+sf::Texture* loadTexture(std::string name, std::string path) {
 	// Haven't loaded it yet, time to create it
 	sf::Texture *texture = new sf::Texture();
 
@@ -34,8 +35,8 @@ void freeTextureManager() {
 
 	// Delete all of the textures we used
 	sf::Texture *texture;
-	std::map<std::string, sf::Texture*>::iterator iter = textureManager::textures.begin();
-	while (iter != textureManager::textures.end()) {
+	std::map<std::string, sf::Texture*>::iterator iter = textures.begin();
+	while (iter != textures.end()) {
 		texture = iter->second;
 		delete texture;
 		iter++;
