@@ -4,6 +4,7 @@
 #include "graphics/UI/Case.hpp"
 #include <random>
 #include <time.h>
+#include "graphics/utils/TextureManager.hpp"
 
 typedef enum {
 	MAIN_MENU,
@@ -13,7 +14,27 @@ GAME_STATE STATE = MAIN_MENU;
 long debug = 0;
 long debug2 = 0;
 
+
+void loading()
+{
+	loadTexture("DIRT", "resources/textures/tiles/dirt.png");
+	loadTexture("STONE", "resources/textures/tiles/stone.png");
+	loadTexture("WATER", "resources/textures/tiles/water.png");
+	loadTexture("GRASS", "resources/textures/tiles/grass.png");
+}
+
+void stop()
+{
+	freeTextureManager();
+}
+
+
+
+
 int main() {
+
+
+	loading();
 
 	//sf::View main_menu_view(sf::FloatRect(0, 0, 1280, 720));
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
@@ -69,6 +90,8 @@ int main() {
 		 return 1;
 		 */
 	}
+
+	stop();
 
 	return 0;
 }

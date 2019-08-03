@@ -10,10 +10,11 @@ sf::Color Case::getColor() const {
 
 void Case::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 	sf::Vertex square[4];
-	square[0] = sf::Vertex(sf::Vector2f(_x, _y), getColor());
-	square[1] = sf::Vertex(sf::Vector2f(_x + CASE_WIDTH, _y), getColor());
-	square[2] = sf::Vertex(sf::Vector2f(_x + CASE_WIDTH, _y + CASE_HEIGHT), getColor());
-	square[3] = sf::Vertex(sf::Vector2f(_x, _y + CASE_HEIGHT), getColor());
+	states.texture = getTexture(_id);
+	square[0] = sf::Vertex(sf::Vector2f(_x, _y), getColor(),  sf::Vector2f(0, 0));
+	square[1] = sf::Vertex(sf::Vector2f(_x + CASE_WIDTH, _y), getColor(), sf::Vector2f(32, 0));
+	square[2] = sf::Vertex(sf::Vector2f(_x + CASE_WIDTH, _y + CASE_HEIGHT), getColor(), sf::Vector2f(32, 32));
+	square[3] = sf::Vertex(sf::Vector2f(_x, _y + CASE_HEIGHT), getColor(), sf::Vector2f(0, 32));
 
 	target.draw(square, 4, sf::Quads, states);
 }

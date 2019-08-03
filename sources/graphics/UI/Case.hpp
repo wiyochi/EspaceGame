@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics.hpp>
+#include "../utils/TextureManager.hpp"
 
 const int CASE_WIDTH = 32;
 const int CASE_HEIGHT = 32;
