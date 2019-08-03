@@ -14,7 +14,6 @@ protected:
     sf::RectangleShape _shape;
     sf::RenderWindow & _window;
 public:
-    static std::vector<Button*> _buttons;
     
     Button(sf::RenderWindow & window, std::string fontName, sf::String text, sf::Vector2f size);
     virtual void draw();
