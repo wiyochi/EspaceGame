@@ -12,7 +12,7 @@ PoleButton::PoleButton(int id, sf::RenderWindow & window) : Button(window, "reso
 
 void PoleButton::draw()
 {
-    Button::draw();
+    //Button::draw();
     _map.draw();
 }
 

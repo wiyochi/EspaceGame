@@ -5,3 +5,8 @@ EspaceGame.vcxproj
 EspaceGame.vcxproj.filters
 EspaceGame.vcxproj.user
 rapidjson/
+\.settings/
+
+\.cproject
+
+\.project
