@@ -3,7 +3,6 @@
 
 #include <string>
 #include <iostream>
-#include "Button.hpp"
 #include <cstdlib>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics.hpp>
@@ -11,18 +10,16 @@
 const int CASE_WIDTH = 32;
 const int CASE_HEIGHT = 32;
 
-class Case : Button {
+class Case : public sf::Drawable {
 private:
     int _x;
     int _y;
-    sf::Color _color;
-    sf::Color getColor();
-    const sf::Color getUniqColor();
+    std::string _id;
+    sf::Color getColor()const;
+    virtual void draw(sf::RenderTarget& target,sf::RenderStates states)const;
 public:
-    Case(sf::RenderWindow & window, int x, int y);
-    
-    virtual void draw();
-    
+    Case(int x, int y, std::string id);
+    std::string getId()const;
 };
 
 #endif

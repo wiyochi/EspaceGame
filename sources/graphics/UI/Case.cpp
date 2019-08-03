@@ -1,25 +1,27 @@
 #include "Case.hpp"
 
-Case::Case(sf::RenderWindow & window, int x, int y): Button(window, "resources/fonts/Roboto-Thin.ttf", "", sf::Vector2f(CASE_WIDTH, CASE_HEIGHT)), _x(x), _y(y), _color(getUniqColor())
+Case::Case(int x, int y, std::string id): _x(x), _y(y), _id(id)
 {
-    _shape.setFillColor(getColor());
-    _shape.move(_x,_y);
+}
+
+sf::Color Case::getColor()const
+{
+    return (_id == "DIRT") ? sf::Color::Red : sf::Color::Blue;
+}
+
+void Case::draw(sf::RenderTarget& target,sf::RenderStates states)const
+{
+	sf::Vertex square[4];
+	square[0] = sf::Vertex(sf::Vector2f(_x, _y), getColor());
+	square[1] = sf::Vertex(sf::Vector2f(_x + CASE_WIDTH, _y), getColor());
+	square[2] = sf::Vertex(sf::Vector2f(_x + CASE_WIDTH, _y + CASE_HEIGHT), getColor());
+	square[3] = sf::Vertex(sf::Vector2f(_x, _y + CASE_HEIGHT), getColor());
+
+	target.draw(square, 4, sf::Quads, states);
 }
 
 
-const sf::Color Case::getUniqColor()
+std::string Case::getId()const
 {
-    return sf::Color(rand() % 256, rand() % 256, rand() % 256);
+	return _id;
 }
-
-sf::Color Case::getColor()
-{
-    return _color;
-}
-
-void Case::draw()
-{
-    _window.draw(_shape);
-}
-
-
