@@ -7,16 +7,16 @@
 #include "Map.hpp"
 #include <SFML/Graphics.hpp>
 
-const int x[] = {0, 640, 0, 640};
-const int y[] = {0, 0, 360, 360};
+const int x[] = { 0, 640, 0, 640 };
+const int y[] = { 0, 0, 360, 360 };
 
-class PoleButton : public Button {
+class PoleButton: public Button {
 private:
-    Map _map;
+	Map _map;
 public:
-    PoleButton(int id, sf::RenderWindow & window);
-    virtual void action();
-    virtual void draw();
+	PoleButton(int id, sf::RenderWindow &window);
+	virtual void action();
+	virtual void draw();
 };
 
 #endif

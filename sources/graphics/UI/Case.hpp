@@ -10,16 +10,16 @@
 const int CASE_WIDTH = 32;
 const int CASE_HEIGHT = 32;
 
-class Case : public sf::Drawable {
+class Case: public sf::Drawable {
 private:
-    int _x;
-    int _y;
-    std::string _id;
-    sf::Color getColor()const;
-    virtual void draw(sf::RenderTarget& target,sf::RenderStates states)const;
+	int _x;
+	int _y;
+	std::string _id;
+	sf::Color getColor() const;
+	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 public:
-    Case(int x, int y, std::string id);
-    std::string getId()const;
+	Case(int x, int y, std::string id);
+	std::string getId() const;
 };
 
 #endif
