@@ -44,8 +44,8 @@ int main() {
 	PoleButton pole3(2, window);
 	PoleButton pole4(3, window);
 
-	sf::View _view(sf::FloatRect(0, 0, 70000, 1700));
-	window.setView(_view);
+	//sf::View _view(sf::FloatRect(0, 0, 70000, 1700));
+	//window.setView(_view);
 
 	std::default_random_engine re(time(0));
 	std::uniform_int_distribution<int> distrib(0, 255);
@@ -79,10 +79,15 @@ int main() {
 
 		window.clear();
 
+		pole1.action();
 		pole1.draw();
+		pole2.action();
 		pole2.draw();
+		pole3.action();
 		pole3.draw();
+		pole4.action();
 		pole4.draw();
+
 
 		window.display();
 		//  std::cout << "DEBUG : " << debug << std::endl;

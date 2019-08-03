@@ -14,8 +14,8 @@ Map::Map(int id, sf::RenderWindow &window) :
 
 	std::string test[4] = { "DIRT", "STONE", "GRASS", "WATER" };
 
-	_map_view = sf::View(sf::FloatRect(id * MAP_WIDTH * CASE_WIDTH + MAP_OFFSET, 0, MAP_WIDTH * CASE_WIDTH, MAP_HEIGHT * CASE_HEIGHT));
-	_map_view.setViewport(sf::FloatRect(0, 0, 9.0 / 16.0, 1));
+	_map_view = sf::View(sf::FloatRect(_x, _y, MAP_WIDTH * CASE_WIDTH, MAP_HEIGHT*CASE_HEIGHT));
+	_map_view.setViewport(sf::FloatRect((id % 2) * .5, (id / 2) * .5, (id % 2) * .5 + .5, (id / 2) * .5 + .5));
 	for (int x = 0; x < MAP_WIDTH; ++x) {
 		for (int y = 0; y < MAP_HEIGHT; ++y) {
 			cases.push_back(Case(x * CASE_WIDTH + _x, y * CASE_HEIGHT + _y, test[id]));
