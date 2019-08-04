@@ -15,6 +15,7 @@ private:
 	Map _map;
 public:
 	PoleButton(int id, sf::RenderWindow &window);
+	void setMapMode(int mode);
 	virtual void action();
 	virtual void draw();
 };

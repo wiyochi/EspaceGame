@@ -9,11 +9,14 @@ PoleButton::PoleButton(int id, sf::RenderWindow &window) :
 }
 
 void PoleButton::draw() {
-	//Button::draw();
 	_map.draw();
+	_window.setView(sf::View(sf::FloatRect(0, 0, 1280, 720)));
 }
 
 void PoleButton::action() {
 	std::cout << "Click redef" << std::endl;
-	_map.activeView();
+}
+
+void PoleButton::setMapMode(int mode) {
+	_map.setMode(mode);
 }

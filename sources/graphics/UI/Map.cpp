@@ -1,7 +1,7 @@
 #include "Map.hpp"
 
 Map::Map(int id, sf::RenderWindow &window) :
-		_x((id + 1) * MAP_WIDTH * CASE_WIDTH * 3), _y(0), _window(window) {
+		_x((id + 1) * MAP_WIDTH * CASE_WIDTH * 3), _y(0), _mode(Map::SPLITSCREEN), _id(id), _window(window) {
 	/*
 	 * Les poles sont déssinés à partir des points suivants :
 	 * 	- (0 + 1) * MAP_WIDTH * CASE_WIDTH * 3 = 1 * 100 * 32 * 3 =  9600
@@ -14,7 +14,7 @@ Map::Map(int id, sf::RenderWindow &window) :
 
 	std::string test[4] = { "DIRT", "STONE", "GRASS", "WATER" };
 
-	_map_view = sf::View(sf::FloatRect(_x, _y, MAP_WIDTH * CASE_WIDTH, MAP_HEIGHT*CASE_HEIGHT));
+	_map_view = sf::View(sf::FloatRect(_x, _y, MAP_WIDTH * CASE_WIDTH, MAP_HEIGHT * CASE_HEIGHT));
 	_map_view.setViewport(sf::FloatRect((id % 2) * .5, (id / 2) * .5, (id % 2) * .5 + .5, (id / 2) * .5 + .5));
 	for (int x = 0; x < MAP_WIDTH; ++x) {
 		for (int y = 0; y < MAP_HEIGHT; ++y) {
@@ -23,9 +23,30 @@ Map::Map(int id, sf::RenderWindow &window) :
 	}
 }
 
+void Map::setMode(int mode) {
+	_mode = mode;
+	switch (_mode) {
+		case SPLITSCREEN:
+			_map_view = sf::View(sf::FloatRect(_x, _y, MAP_WIDTH * CASE_WIDTH, MAP_HEIGHT * CASE_HEIGHT));
+			_map_view.setViewport(sf::FloatRect((_id % 2) * .5, (_id / 2) * .5, (_id % 2) * .5 + .5, (_id / 2) * .5 + .5));
+			break;
+		case FULLSCREEN:
+			_map_view.reset(sf::FloatRect(_x, _y, MAP_WIDTH * CASE_WIDTH, MAP_HEIGHT * CASE_HEIGHT));
+			_map_view.setViewport(sf::FloatRect(0, 0, 1, 1));
+			break;
+		default:
+			break;
+	}
+
+}
+
 void Map::draw() const {
-	for (auto r : cases)
-		_window.draw(r);
+	_window.setView(_map_view);
+
+	if (_mode != NO_SCREEN) {
+		for (auto r : cases)
+			_window.draw(r);
+	}
 }
 
 void Map::activeView() {
