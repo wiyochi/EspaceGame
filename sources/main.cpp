@@ -26,7 +26,7 @@ void loading() {
 	loadTexture("GRASS", "resources/textures/tiles/grass.png");
 }
 
-void stop() {
+void stoping() {
 	freeTextureManager();
 }
 
@@ -43,7 +43,51 @@ int main() {
 	//sf::View _view(sf::FloatRect(0, 0, 70000, 1700));
 	//window.setView(_view);
 
-	while (window.isOpen()) {
+	sf::View v;
+	float viewSpeed = 0.1f;
+
+	Grid* poles[4] = {nullptr};
+
+	Loader::loadItems("resources/item/items.json");
+	Loader::loadSave("resources/saves/savesTest.json", poles);
+	Tree* t = Loader::loadSkillTree("resources/skillTree/test.json");
+
+	bool stop = false;
+
+	for (unsigned int i = 0; i < Item::items.size(); i++)
+	{
+		std::cout << "Item " << i << " : " << *(Item::items[i]) << std::endl;
+	}
+
+	for (size_t i = 0; i < 4; ++i)
+	{
+		std::cout << "Pole " << poles[i]->getName() << std::endl;
+		for (const auto machine : poles[i]->getMachines())
+		{
+			std::cout << *(machine) << std::endl;
+		}
+	}
+
+	(*t)["sediment"]->increase();
+	(*t)["miningDepth"]->increase();
+	(*t)["miningDepth"]->increase();
+	(*t)["miningDepth"]->increase();
+	(*t)["miningDepth"]->increase();
+	(*t)["crushing"]->increase();
+
+	std::cout << "#### Avant ####" << std::endl << *t << std::endl;
+
+	(*t)["sediment"]->increase();
+	(*t)["crushing"]->increase();
+
+	std::cout << "#### Après ####" << std::endl << *t << std::endl;
+
+
+
+
+
+	while (window.isOpen()) 
+    {
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -68,11 +112,12 @@ int main() {
 				if(event.key.code == sf::Keyboard::Escape)
 					window.close();
 				break;
-			if (event.type == sf::Event::MouseButtonPressed) {
+            case sf::Event::MouseButtonPressed:
 				float x = window.mapPixelToCoords(sf::Mouse::getPosition(window)).x;
 				float y = window.mapPixelToCoords(sf::Mouse::getPosition(window)).y;
 				std::cout << "SREEN{" << event.mouseButton.x << ";" << event.mouseButton.y << "}   ||    GAME{" << x << ";" << y << "}" << std::endl;
-				switch (STATE) {
+				switch (STATE) 
+                {
 					case MAIN_MENU:
 						if (pole1.contains(x, y)) STATE = POLE_1;
 						if (pole2.contains(x, y)) STATE = POLE_2;
@@ -81,8 +126,8 @@ int main() {
 						break;
 					case POLE_1 ... POLE_4:
 						STATE = MAIN_MENU;
+                        break;
 				}
-			default:
 				break;
 			}
 		}
@@ -155,7 +200,7 @@ int main() {
 		window.display();
 	}
 
-	stop();
+	stoping();
 
 	// Liberation memoire des poles (machines)
 	for(size_t i = 0; i < 4; i++)
