@@ -4,7 +4,6 @@ PoleButton::PoleButton(int id, sf::RenderWindow &window) :
 		Button(window, "resources/fonts/Roboto-Thin.ttf", L"Pôle ", sf::Vector2f(640, 360)), _map(id, window) {
 	move(x[id], y[id]);
 
-	std::cout << std::to_string(id) << std::endl;
 	addText(std::to_string(id));
 }
 
