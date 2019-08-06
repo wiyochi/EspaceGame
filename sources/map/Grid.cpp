@@ -62,6 +62,7 @@ void Grid::update(sf::RenderWindow& window)
 {
 	for (size_t i = 0; i < m_cases.size(); i++)
 	{
+		m_machines[i]->update(window);
 		for (auto& rec : m_cases[i])
 		{
 			if (!m_leftClickPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left) && rec.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window))))

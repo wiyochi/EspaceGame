@@ -54,8 +54,12 @@ namespace Loader
 		return new ItemSet(items, quantity);
 	}
 
-	Machine* loadMachine(std::string JSonFile)
+	Machine* loadMachine(std::string machineName)
 	{
+		std::string JSonFile = MACHINE_PATH;
+		JSonFile.append(machineName);
+		JSonFile.append(".json");
+
 		rapidjson::Document d = getDocument(JSonFile);
 
 		ItemSet*			in			= loadItemSet(d["in"]);
@@ -64,7 +68,7 @@ namespace Loader
 		std::string			texture		= d["texture"].GetString();
 		rapidjson::Value&	vertexArray	= d["shape"];
 
-		Machine* machine = new Machine(texture, energy);
+		Machine* machine = new Machine(machineName, texture, energy);
 		machine->setIn(in);
 		machine->setOut(out);
 
@@ -75,6 +79,16 @@ namespace Loader
 			machineShape.push_back(sf::Vector2i(vertex[0].GetInt(), vertex[1].GetInt()));
 		}
 		return machine;
+	}
+
+	void loadMachineArray(rapidjson::Value& machineArray, Grid* pole)
+	{
+		for (rapidjson::SizeType i = 0; i < machineArray.Size(); i++)
+		{
+			Machine* m = loadMachine(machineArray[i]["machine"].GetString());
+			m->setPosition(sf::Vector2i(machineArray[i]["x"].GetInt(), machineArray[i]["y"].GetInt()));
+			pole->addMachine(m);
+		}
 	}
 
 	void loadSave(std::string JSonFile, Grid* poles[4])
@@ -106,20 +120,6 @@ namespace Loader
 		loadMachineArray(machineArray, poles[3]);
 	}
 
-	void loadMachineArray(rapidjson::Value& machineArray, Grid* pole)
-	{
-		for (rapidjson::SizeType i = 0; i < machineArray.Size(); i++)
-		{
-			std::string str = MACHINE_PATH;
-			str.append(machineArray[i]["machine"].GetString());
-			str.append(".json");
-			Machine* m = loadMachine(str);
-			m->setName(machineArray[i]["machine"].GetString());
-			m->setPosition(sf::Vector2i(machineArray[i]["x"].GetInt(), machineArray[i]["y"].GetInt()));
-			pole->addMachine(m);
-		}
-	}
-
 	void loadItems(std::string JSonFile)
 	{
 		rapidjson::Document d = getDocument(JSonFile);
@@ -129,20 +129,27 @@ namespace Loader
 			new Item(itemsArray[i]["name"].GetString(), itemsArray[i]["class"].GetString(), itemsArray[i]["texture"].GetString());
 	}
 
-	Tree* loadSkillTree(std::string JSonFile)
+	bool loadSkillTree(std::string JSonFile, Tree** newTree)
 	{
 		rapidjson::Document d = getDocument(JSonFile);
-		Tree* tree = new Tree();
-
-		rapidjson::Value& nodesArray = d["tree"];
-		for (rapidjson::SizeType i = 0; i < nodesArray.Size(); i++)
+		if (!d.IsNull())
 		{
-			std::string name = nodesArray[i]["name"].GetString();
-			tree->addSkill(name, nodesArray[i]["description"].GetString());
-			rapidjson::Value& needArray = nodesArray[i]["need"];
-			for (rapidjson::SizeType j = 0; j < needArray.Size(); j++)
-				(*tree)[name]->addNeededNode((*tree)[needArray[j]["name"].GetString()], needArray[j]["quantity"].GetInt());
+			*newTree = new Tree();
+
+			rapidjson::Value& nodesArray = d["tree"];
+			for (rapidjson::SizeType i = 0; i < nodesArray.Size(); i++)
+			{
+				std::string name = nodesArray[i]["name"].GetString();
+				(*newTree)->addSkill(name, nodesArray[i]["description"].GetString());
+				rapidjson::Value& needArray = nodesArray[i]["need"];
+				for (rapidjson::SizeType j = 0; j < needArray.Size(); j++)
+					(**newTree)[name]->addNeededNode((**newTree)[needArray[j]["name"].GetString()], needArray[j]["quantity"].GetInt());
+			}
 		}
-		return tree;
+		else
+		{
+			*newTree = nullptr;
+		}
+		return *newTree != nullptr;
 	}
 }

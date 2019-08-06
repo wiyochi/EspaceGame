@@ -1,6 +1,7 @@
 #include "Machine.hpp"
 
-Machine::Machine(std::string filename_texture, float energy) :
+Machine::Machine(std::string machineName, std::string filename_texture, float energy) :
+	m_name(machineName),
 	m_position(sf::Vector2i(0, 0)),
 	m_setIn(nullptr),
 	m_setOut(nullptr),
@@ -9,24 +10,20 @@ Machine::Machine(std::string filename_texture, float energy) :
 {
 	if (!m_texture.loadFromFile(filename_texture))
 		std::cout << "Fail to load machine texture" << std::endl;
-	m_tree = Loader::loadSkillTree("resources/skillTree/" + m_name + "_tree.json");
-	m_tree->initLinks();
+	if(Loader::loadSkillTree(SKILL_TREE_PATH + m_name + SKILL_EXTENSION, &m_tree))
+		m_tree->initLinks();
 }
 
 Machine::~Machine()
 {
 	delete m_setIn;
 	delete m_setOut;
+	delete m_tree;
 }
 
 std::string Machine::getName()
 {
 	return m_name;
-}
-
-void Machine::setName(std::string name)
-{
-	m_name = name;
 }
 
 std::vector<sf::Vector2i>& Machine::getShape()
@@ -61,6 +58,12 @@ void Machine::setOut(ItemSet* set)
 void Machine::switchDrawTree()
 {
 	m_showTree = !m_showTree;
+}
+
+void Machine::update(sf::RenderWindow& window)
+{
+	if(m_tree)
+		m_tree->update(window);
 }
 
 std::ostream& operator<<(std::ostream& out, Machine& m)

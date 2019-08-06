@@ -23,12 +23,16 @@ int main()
 	// Poles declaration
 	Grid* poles[4] = { nullptr };
 
+	Tree* t = nullptr;
+
 	// Load game objetcs
 	Loader::loadItems("resources/item/items.json");
 	Loader::loadSave("resources/save/saveTest.json", poles);
-	Tree* t = Loader::loadSkillTree("resources/skillTree/test.json");
-	t->setPosition(sf::Vector2f(900.f, 20.f));
-	t->initLinks();
+	if (Loader::loadSkillTree("resources/skillTree/test.json", &t))
+	{
+		t->setPosition(sf::Vector2f(900.f, 20.f));
+		t->initLinks();
+	}
 
 	bool keyPressed_S = false;
 

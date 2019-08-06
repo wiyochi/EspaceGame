@@ -1,0 +1,28 @@
+{
+  "tree": [
+    {
+      "name": "SKILL 1_2",
+      "description": "ouai ouai ouai",
+      "need": []
+    },
+    {
+      "name": "SKILL 2_2",
+      "description": "oué oué oué",
+      "need": []
+    },
+    {
+      "name": "SKILL 3_2",
+      "description": "Flemme de faire du game design",
+      "need": [
+        {
+          "name": "SKILL 1_2",
+          "quantity": 15
+        },
+        {
+          "name": "SKILL 2_2",
+          "quantity": 9
+        }
+      ]
+    }
+  ]
+}
