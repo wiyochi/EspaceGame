@@ -20,7 +20,7 @@ SRCDIR = ./sources/
 OBJDIR = ./bin/obj/
 EXEC    = ./bin/EspaceGame
 DEPFILE = $(OBJDIR)mk.depend
-INCDIR = 
+INCDIR = -I"."
 LIBDIR = 
 INCLIB = -lsfml-graphics -lsfml-window -lsfml-system
  

@@ -49,7 +49,7 @@ int main() {
 	Grid* poles[4] = {nullptr};
 
 	Loader::loadItems("resources/item/items.json");
-	Loader::loadSave("resources/saves/savesTest.json", poles);
+	Loader::loadSave("resources/save/saveTest.json", poles);
 	Tree* t = Loader::loadSkillTree("resources/skillTree/test.json");
 
 	bool stop = false;
