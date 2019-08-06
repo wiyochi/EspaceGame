@@ -109,6 +109,8 @@ int main()
 
 		// Updates
 		t->update(window);
+		for (const auto pole : poles)
+			pole->update(window);
 		window.setView(v);
 
 		window.clear();

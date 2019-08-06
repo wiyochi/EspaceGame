@@ -4,10 +4,13 @@ Machine::Machine(std::string filename_texture, float energy) :
 	m_position(sf::Vector2i(0, 0)),
 	m_setIn(nullptr),
 	m_setOut(nullptr),
-	m_energy(energy)
+	m_energy(energy),
+	m_showTree(false)
 {
 	if (!m_texture.loadFromFile(filename_texture))
 		std::cout << "Fail to load machine texture" << std::endl;
+	m_tree = Loader::loadSkillTree("resources/skillTree/" + m_name + "_tree.json");
+	m_tree->initLinks();
 }
 
 Machine::~Machine()
@@ -55,6 +58,11 @@ void Machine::setOut(ItemSet* set)
 	m_setOut = set;
 }
 
+void Machine::switchDrawTree()
+{
+	m_showTree = !m_showTree;
+}
+
 std::ostream& operator<<(std::ostream& out, Machine& m)
 {
 	out << "Machine(" << &m;
@@ -70,4 +78,6 @@ std::ostream& operator<<(std::ostream& out, Machine& m)
 
 void Machine::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	if (m_showTree)
+		target.draw(*m_tree, states);
 }
