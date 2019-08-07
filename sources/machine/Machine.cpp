@@ -1,29 +1,31 @@
 #include "Machine.hpp"
 
-Machine::Machine(std::string filename_texture, float energy) :
+Machine::Machine(std::string machineName, std::string filename_texture, float energy, Tree* tree) :
+	m_name(machineName),
 	m_position(sf::Vector2i(0, 0)),
 	m_setIn(nullptr),
 	m_setOut(nullptr),
-	m_energy(energy)
+	m_energy(energy),
+	m_tree(tree),
+	m_showTree(false)
 {
 	if (!m_texture.loadFromFile(filename_texture))
 		std::cout << "Fail to load machine texture" << std::endl;
+	if(m_tree)
+		m_tree->initLinks();
 }
 
 Machine::~Machine()
 {
 	delete m_setIn;
 	delete m_setOut;
+	if(m_tree)
+		delete m_tree;
 }
 
 std::string Machine::getName()
 {
 	return m_name;
-}
-
-void Machine::setName(std::string name)
-{
-	m_name = name;
 }
 
 std::vector<sf::Vector2i>& Machine::getShape()
@@ -55,6 +57,17 @@ void Machine::setOut(ItemSet* set)
 	m_setOut = set;
 }
 
+void Machine::switchDrawTree()
+{
+	m_showTree = !m_showTree;
+}
+
+void Machine::update(sf::RenderWindow& window)
+{
+	if(m_tree && m_showTree)
+		m_tree->update(window);
+}
+
 std::ostream& operator<<(std::ostream& out, Machine& m)
 {
 	out << "Machine(" << &m;
@@ -70,4 +83,6 @@ std::ostream& operator<<(std::ostream& out, Machine& m)
 
 void Machine::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	if (m_tree && m_showTree)
+		target.draw(*m_tree, states);
 }

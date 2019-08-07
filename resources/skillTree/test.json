@@ -1,28 +1,177 @@
 {
-    "tree": [
+  "tree": [
+    {
+      "name": "sediment",
+      "description": "Amélioration du minage de sédiments",
+      "need": []
+    },
+    {
+      "name": "miningDepth",
+      "description": "Amélioration du minage en profondeur",
+      "need": []
+    },
+    {
+      "name": "HighTemp",
+      "description": "Gestion des hautes températures",
+      "need": []
+    },
+    {
+      "name": "highTension",
+      "description": "Gestion des hautes tensions",
+      "need": []
+    },
+    {
+      "name": "solar",
+      "description": "Techniques d'énergies solaires",
+      "need": []
+    },
+    {
+      "name": "diagnosticTools",
+      "description": "Techniques de diagnostic",
+      "need": []
+    },
+    {
+      "name": "AI",
+      "description": "Programmes d'intelligences artificielles",
+      "need": []
+    },
+    {
+      "name": "laser",
+      "description": "Techniques optiques",
+      "need": []
+    },
+    {
+      "name": "materialsPhysics",
+      "description": "Sciences des matériaux",
+      "need": []
+    },
+    {
+      "name": "3DPrint",
+      "description": "Techniques d'impression 3D",
+      "need": [
         {
-            "name": "sediment",
-            "description": "Amélioration du minage de sédiments",
-            "need": []
+          "name": "AI",
+          "quantity": 2
         },
         {
-            "name": "miningDepth",
-            "description": "Amélioration du minage en profondeur",
-            "need": []
-        },
-        {
-            "name": "crushing",
-            "description": "concassage",
-            "need": [
-                {
-                    "name": "sediment",
-                    "quantity": 2
-                },
-                {
-                    "name": "miningDepth",
-                    "quantity": 3
-                }
-            ]
+          "name": "diagnosticTools",
+          "quantity": 3
         }
-    ]
+      ]
+    },
+    {
+      "name": "robotic",
+      "description": "Création de robots",
+      "need": [
+        {
+          "name": "laser",
+          "quantity": 3
+        },
+        {
+          "name": "AI",
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "name": "meltingTemp",
+      "description": "Gestion de la température de fusion",
+      "need": [
+        {
+          "name": "highTemp",
+          "quantity": 2
+        },
+        {
+          "name": "miningDepth",
+          "quantity": 3
+        }
+      ]
+    },
+    {
+      "name": "crushing",
+      "description": "concassage",
+      "need": [
+        {
+          "name": "sediment",
+          "quantity": 3
+        },
+        {
+          "name": "materialsPhysics",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "name": "chemistry",
+      "description": "Science des molécules",
+      "need": [
+        {
+          "name": "meltingTemp",
+          "quantity": 3
+        },
+        {
+          "name": "3DPrint",
+          "quantity": 3
+        },
+        {
+          "name": "highTemp",
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "name": "heavyAtom",
+      "description": "Atomes lourds",
+      "need": [
+        {
+          "name": "meltingTemp",
+          "quantity": 6
+        },
+        {
+          "name": "chemistry",
+          "quantity": 2
+        },
+        {
+          "name": "crushing",
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "name": "lightAtom",
+      "description": "Atomes légers",
+      "need": [
+        {
+          "name": "robotic",
+          "quantity": 6
+        },
+        {
+          "name": "chemistry",
+          "quantity": 2
+        },
+        {
+          "name": "laser",
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "name": "nuclear",
+      "description": "Nucléaire",
+      "need": [
+        {
+          "name": "heavyAtom",
+          "quantity": 6
+        },
+        {
+          "name": "chemistry",
+          "quantity": 10
+        },
+        {
+          "name": "lightAtom",
+          "quantity": 6
+        }
+      ]
+    }
+  ]
 }

@@ -1,6 +1,7 @@
-===================== Info save =====================
+# Info save
 
-### Forme du JSon ###
+## Forme du JSon
+```json
 {
   "mine": {
     "machines": [
@@ -63,8 +64,8 @@
     ]
   }
 }
-
-### Explications ###
+```
+## Explications
 Le document JSon a une valeur pour chaque pole du jeu donc
  - valeur "mine"
  - valeur "factory"
@@ -77,5 +78,6 @@ Ainsi chaque objet de ce tableau contient:
  - le nom de la machine (sous la valeur "machine")
  - la position en x (entier sous la valeur "x")
  - la position en y (entier sous la valeur "y")
+
 Cette position représente l'emplacement dans la grille du pole de la case (0,0)
 de la "shape" de la machine.

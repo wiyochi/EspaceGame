@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <SFML/Graphics.hpp>
 #include "Node.hpp"
 
 /*  Exemple d'utilisation:
@@ -34,16 +35,28 @@ t->addSkill("crushing", "description de crushing");
 (*t)["crushing"]->increase();
 */
 
-class Tree
+class Tree : public sf::Drawable
 {
 public:
     Tree();
     ~Tree();
-    Node* addSkill(std::string name, std::string description);
+    Node*   addSkill    (std::string name, std::string description);
+
+	// ### Pour l'affichage de débug
+    void    setPosition (sf::Vector2f pos);
+    void    update      (sf::RenderWindow& window);
+	void	initLinks	();
+	// ###
 
     Node* operator[](std::string name);
     friend std::ostream& operator<<(std::ostream& out, Tree& t);
 
 private:
-    std::vector<Node*> m_tree;
+    std::vector<Node*>		m_tree;
+
+	// ### Pour l'affichage de débug
+    sf::Vector2f			m_origin;
+
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	// ###
 };

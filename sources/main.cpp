@@ -43,16 +43,30 @@ int main() {
 	//sf::View _view(sf::FloatRect(0, 0, 70000, 1700));
 	//window.setView(_view);
 
+	// View (d�bug)
 	sf::View v;
-	float viewSpeed = 0.1f;
+	float viewSpeed = 0.5f;
 
-	Grid* poles[4] = {nullptr};
+	// Game Time
+	sf::Clock clock;
+	sf::Time elapsedTime;
+	int	deltaTime;
 
+	// Poles declaration
+	Grid* poles[4] = { nullptr };
+
+	Tree* t = nullptr;
+
+	// Load game objetcs
 	Loader::loadItems("resources/item/items.json");
 	Loader::loadSave("resources/save/saveTest.json", poles);
-	Tree* t = Loader::loadSkillTree("resources/skillTree/test.json");
+	if (Loader::loadSkillTree("resources/skillTree/test.json", &t))
+	{
+		t->setPosition(sf::Vector2f(900.f, 20.f));
+		t->initLinks();
+	}
 
-	bool stop = false;
+	bool keyPressed_S = false;
 
 	for (unsigned int i = 0; i < Item::items.size(); i++)
 	{
@@ -68,26 +82,8 @@ int main() {
 		}
 	}
 
-	(*t)["sediment"]->increase();
-	(*t)["miningDepth"]->increase();
-	(*t)["miningDepth"]->increase();
-	(*t)["miningDepth"]->increase();
-	(*t)["miningDepth"]->increase();
-	(*t)["crushing"]->increase();
-
-	std::cout << "#### Avant ####" << std::endl << *t << std::endl;
-
-	(*t)["sediment"]->increase();
-	(*t)["crushing"]->increase();
-
-	std::cout << "#### Après ####" << std::endl << *t << std::endl;
-
-
-
-
-
-	while (window.isOpen()) 
-    {
+	while (window.isOpen())
+	{
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -97,6 +93,7 @@ int main() {
 				window.close();
 				break;
 			case sf::Event::MouseWheelScrolled:
+				// Zoom and dezoom camera
 				if (event.mouseWheelScroll.delta < 0)
 				{
 					v.zoom(1.1f);
@@ -132,26 +129,37 @@ int main() {
 			}
 		}
 
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::S) && !stop)
+		// Get delta time between 2 frames
+		elapsedTime = clock.getElapsedTime();
+		clock.restart();
+		deltaTime = elapsedTime.asMilliseconds();
+
+		// S key to save actual poles
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::S) && !keyPressed_S)
 		{
-			stop = true;
+			keyPressed_S = true;
 			std::cout << "Sauvegarde..." << std::endl;
 			Writer::save("resources/save/testWriter.json", poles);
 		}
-		else if(!sf::Keyboard::isKeyPressed(sf::Keyboard::S) && stop)
+		else if(!sf::Keyboard::isKeyPressed(sf::Keyboard::S) && keyPressed_S)
 		{
-			stop = false;
+			keyPressed_S = false;
 		}
 
+		// Arrows to move camera
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-			v.move(0, -viewSpeed);
+			v.move(0, -viewSpeed * deltaTime);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			v.move(0, viewSpeed);
+			v.move(0, viewSpeed * deltaTime);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-			v.move(-viewSpeed, 0);
+			v.move(-viewSpeed * deltaTime, 0);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			v.move(viewSpeed, 0);
+			v.move(viewSpeed * deltaTime, 0);
 
+		// Updates
+		t->update(window);
+		for (const auto pole : poles)
+			pole->update(window);
 		window.setView(v);
 
 		window.clear();
@@ -195,23 +203,29 @@ int main() {
 		pole3.draw();
 		pole4.draw();
 
+
+		// Draws
 		for (size_t i = 0; i < 4; i++)
 			window.draw(*(poles[i]));
+		window.draw(*t);
+
 		window.display();
 	}
 
 	stoping();
 
 	// Liberation memoire des poles (machines)
+	// Poles and machines memory release
 	for(size_t i = 0; i < 4; i++)
 	{
 		if(poles[i] != nullptr)
 			delete poles[i];
 	}
 
-	// Liberation memoire des items
+	// Items memory release
 	Item::deleteItems();
 	
+	// Tree test memory release
 	delete t;
 
 	return 0;
