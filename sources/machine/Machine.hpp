@@ -7,17 +7,10 @@
 #include "../item/ItemSet.hpp"
 #include "../skillTree/Tree.hpp"
 
-namespace Loader {
-	bool loadSkillTree(std::string JSonFile, Tree** newTree);
-}
-
-constexpr auto SKILL_TREE_PATH = "resources/skillTree/";
-constexpr auto SKILL_EXTENSION = "_tree.json";
-
 class Machine : public sf::Drawable
 {
 public:
-	Machine(std::string machineName, std::string filename_texture, float energy);
+	Machine(std::string machineName, std::string filename_texture, float energy, Tree* tree = nullptr);
 	~Machine();
 	std::string					getName		();
 	std::vector<sf::Vector2i>& 	getShape	();

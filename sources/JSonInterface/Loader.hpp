@@ -11,6 +11,8 @@
 #include "../skillTree/Tree.hpp"
 
 constexpr auto MACHINE_PATH = "resources/machine/";
+constexpr auto SKILL_TREE_PATH = "resources/skillTree/";
+constexpr auto SKILL_EXTENSION = "_tree";
 
 namespace Loader
 {

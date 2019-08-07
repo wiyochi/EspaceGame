@@ -56,9 +56,7 @@ namespace Loader
 
 	Machine* loadMachine(std::string machineName)
 	{
-		std::string JSonFile = MACHINE_PATH;
-		JSonFile.append(machineName);
-		JSonFile.append(".json");
+		std::string JSonFile = MACHINE_PATH + machineName + ".json";
 
 		rapidjson::Document d = getDocument(JSonFile);
 
@@ -67,8 +65,10 @@ namespace Loader
 		float				energy		= d["energy"].GetFloat();
 		std::string			texture		= d["texture"].GetString();
 		rapidjson::Value&	vertexArray	= d["shape"];
+		Tree*				tree		= nullptr;
+		loadSkillTree(SKILL_TREE_PATH + machineName + SKILL_EXTENSION + ".json", &tree);
 
-		Machine* machine = new Machine(machineName, texture, energy);
+		Machine* machine = new Machine(machineName, texture, energy, tree);
 		machine->setIn(in);
 		machine->setOut(out);
 
