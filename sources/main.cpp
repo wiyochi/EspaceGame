@@ -157,10 +157,12 @@ int main() {
 			v.move(viewSpeed * deltaTime, 0);
 
 		// Updates
-		t->update(window);
-		for (const auto pole : poles)
-			pole->update(window);
-		window.setView(v);
+
+		// On met en stand-by pour l'instant à cause du chevauchement
+		//t->update(window);
+		//for (const auto pole : poles)
+		//	pole->update(window);
+		//window.setView(v);
 
 		window.clear();
 		switch (STATE) {
@@ -198,23 +200,22 @@ int main() {
 				break;
 		}
 
+		// Draws
 		pole1.draw();
 		pole2.draw();
 		pole3.draw();
 		pole4.draw();
 
-
-		// Draws
-		for (size_t i = 0; i < 4; i++)
-			window.draw(*(poles[i]));
-		window.draw(*t);
+		// On met en stand-by pour l'instant à cause du chevauchement
+		//for (size_t i = 0; i < 4; i++)
+		//	window.draw(*(poles[i]));
+		//window.draw(*t);
 
 		window.display();
 	}
 
 	stoping();
 
-	// Liberation memoire des poles (machines)
 	// Poles and machines memory release
 	for(size_t i = 0; i < 4; i++)
 	{
