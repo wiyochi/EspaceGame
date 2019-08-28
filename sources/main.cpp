@@ -12,6 +12,7 @@ int main()
 	// View (d�bug)
 	sf::View v;
 	float viewSpeed = 2.f;
+	float camSpeed = 0.f;
 
 	// Game Time
 	sf::Clock clock;
@@ -54,14 +55,16 @@ int main()
 		deltaTime = elapsedTime.asMilliseconds();
 
 		// Arrows to move camera
+		camSpeed = viewSpeed * deltaTime;
+		std::cout << "test" << std::endl;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-			v.move(0, -viewSpeed * deltaTime);
+			v.move(0, -camSpeed);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			v.move(0, viewSpeed * deltaTime);
+			v.move(0, camSpeed);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-			v.move(-viewSpeed * deltaTime, 0);
+			v.move(-camSpeed, 0);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			v.move(viewSpeed * deltaTime, 0);
+			v.move(camSpeed, 0);
 
 		// Updates
 		window.setView(v);
